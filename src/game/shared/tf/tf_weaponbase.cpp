@@ -5072,7 +5072,7 @@ void CTFWeaponBase::ApplyOnHitAttributes( CBaseEntity *pVictimBaseEntity, CTFPla
 	{
 		if ( pVictim->m_Shared.InCond( TF_COND_MAD_MILK ) )
 		{
-			int nAmount = info.GetDamage() * 0.6f;
+			int nAmount = info.GetDamage() * 0.75f;
 			iModHealthOnHit += nAmount;
 
 			CTFPlayer *pProvider = ToTFPlayer( pVictim->m_Shared.GetConditionProvider( TF_COND_MAD_MILK ) );

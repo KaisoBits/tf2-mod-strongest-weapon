@@ -3457,10 +3457,10 @@ void CTFPlayerShared::OnAddInvulnerable( void )
 		RemoveCond( TF_COND_BLEEDING );
 	}
 
-	if ( InCond( TF_COND_MAD_MILK ) )
-	{
-		RemoveCond( TF_COND_MAD_MILK );
-	}
+	//if ( InCond( TF_COND_MAD_MILK ) )
+	//{
+	//	RemoveCond( TF_COND_MAD_MILK );
+	//}
 
 	if ( InCond( TF_COND_GAS ) )
 	{
