@@ -1277,7 +1277,7 @@ void CTFProjectile_HealingBolt::ImpactTeamPlayer( CTFPlayer *pOther )
 	if ( pMedigun )
 	{
 		float flTimeSinceDamage = gpGlobals->curtime - pOther->GetLastDamageReceivedTime();
-		float flScale = RemapValClamped( flTimeSinceDamage, 10.f, 15.f, 3.f, 1.f ); /*healingbolt_uber_scale.GetFloat()*/
+		float flScale = 1.f; //RemapValClamped( flTimeSinceDamage, 10.f, 15.f, 3.f, 1.f ); /*healingbolt_uber_scale.GetFloat()*/
 		const float flGainRate = 24.f * flScale;
 
 		// Ubercharge rate is based on the medigun's heal rate, then scaled based on last combat time (same rule as the medigun's heal rate)
