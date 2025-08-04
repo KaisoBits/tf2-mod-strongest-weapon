@@ -1426,10 +1426,13 @@ float CTFGrenadePipebombProjectile::GetDamageRadius()
 {
 	float flRadiusMod = 1.0f;
 
+	int ignoreStickyDownsides = 0;
+	CALL_ATTRIB_HOOK_FLOAT_ON_OTHER(GetLauncher(), ignoreStickyDownsides, ignore_sticky_downsides);
+
 #ifdef GAME_DLL
 	// winbomb prevention.
 	// Air Det
-	if ( m_iType == TF_GL_MODE_REMOTE_DETONATE )
+	if ( m_iType == TF_GL_MODE_REMOTE_DETONATE && !ignoreStickyDownsides)
 	{
 		if ( m_bTouched == false )
 		{

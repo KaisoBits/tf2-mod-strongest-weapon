@@ -297,7 +297,7 @@ void CTFWeaponBaseGrenadeProj::Spawn( void )
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
-#define TF_GRENADE_JUMP_RADIUS	146
+#define TF_GRENADE_JUMP_RADIUS	159
 void CTFWeaponBaseGrenadeProj::Explode( trace_t *pTrace, int bitsDamageType )
 {
 	if ( ShouldNotDetonate() )
