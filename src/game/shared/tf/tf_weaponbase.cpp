@@ -5352,6 +5352,7 @@ void CTFWeaponBase::ApplyOnHitAttributes( CBaseEntity *pVictimBaseEntity, CTFPla
 					// close range full stun, falls off to zero at 1536 (1024 window size)
 					Vector vecDistance = pVictim->GetAbsOrigin() - pAttacker->GetAbsOrigin();
 					float flStunAmount = RemapValClamped( vecDistance.LengthSqr(), (512.0f * 512.0f), (1536.0f * 1536.0f), 0.60f, 0.0f );
+					flStunAmount = 0.60f;
 
 					pVictim->m_Shared.StunPlayer( 0.2, flStunAmount, TF_STUN_MOVEMENT, pAttacker );
 				}
