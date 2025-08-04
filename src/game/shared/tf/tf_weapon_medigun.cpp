@@ -1330,7 +1330,7 @@ bool CWeaponMedigun::FindAndHealTargets( void )
 					}
 					else if ( TFGameRules()->InSetup() && TFGameRules()->GetActiveRoundTimer() )
 					{
-						flChargeAmount *= 3.f;
+						flChargeAmount *= 2.f;
 					}
 				}
 #endif
@@ -1438,7 +1438,7 @@ void CWeaponMedigun::DrainCharge( void )
 			}
 			else
 			{
-				flChargeAmount += flExtraPlayerCost;
+				// flChargeAmount += flExtraPlayerCost;
 			}
 		}
 

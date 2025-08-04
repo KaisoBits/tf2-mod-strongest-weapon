@@ -10912,7 +10912,7 @@ float CTFPlayer::TeamFortress_CalculateMaxSpeed( bool bIgnoreSpecialAbility /*= 
 		if ( pWeapon )
 		{
 			CWeaponMedigun *pMedigun = dynamic_cast< CWeaponMedigun* >( pWeapon );
-			if ( pMedigun )
+			if ( pMedigun && pMedigun->GetMedigunType() == MEDIGUN_QUICKFIX )
 			{
 				// Medics match faster classes when healing them
 				CTFPlayer *pHealTarget = ToTFPlayer( pMedigun->GetHealTarget() );
