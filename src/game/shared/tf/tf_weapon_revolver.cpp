@@ -62,16 +62,22 @@ bool CTFRevolver::DefaultReload( int iClipSize1, int iClipSize2, int iActivity )
 	if ( !pPlayer )
 		return false;
 
-	if ( pPlayer->IsPlayerClass( TF_CLASS_SPY ) )
-	{
-		if ( pPlayer->m_Shared.InCond( TF_COND_STEALTHED ) )
-		{
-			return false;
-		}
-	}
+	int reloadWhenStealthed = 0;
+	CALL_ATTRIB_HOOK_INT(reloadWhenStealthed, reload_when_stealthed);
 
-	if ( pPlayer->m_Shared.IsFeignDeathReady() )
-		return false; // Can't reload if our feign death arm is up.
+	if (reloadWhenStealthed)
+	{
+		if ( pPlayer->IsPlayerClass( TF_CLASS_SPY ) )
+		{
+			if ( pPlayer->m_Shared.InCond( TF_COND_STEALTHED ) )
+			{
+				return false;
+			}
+		}
+
+		if ( pPlayer->m_Shared.IsFeignDeathReady() )
+			return false; // Can't reload if our feign death arm is up.
+	}
 
 	return BaseClass::DefaultReload( iClipSize1, iClipSize2, iActivity );
 

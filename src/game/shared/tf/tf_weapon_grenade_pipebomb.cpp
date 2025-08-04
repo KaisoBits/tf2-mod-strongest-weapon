@@ -970,7 +970,12 @@ int CTFGrenadePipebombProjectile::OnTakeDamage( const CTakeDamageInfo &info )
 	bool bSameTeam = ( info.GetAttacker()->GetTeamNumber() == GetTeamNumber() );
 	if ( !bSameTeam && CanTakeDamage() )
 	{
-		if ( m_bTouched && HasStickyEffects() && ( info.GetDamageType() & (DMG_BULLET|DMG_BUCKSHOT|DMG_BLAST|DMG_SONIC|DMG_MELEE) ) )
+		int cantDestroyStickies = 0;
+		auto weapon = info.GetWeapon();
+		if (weapon)
+			CALL_ATTRIB_HOOK_INT_ON_OTHER(weapon, cantDestroyStickies, cant_destroy_stickies);
+
+		if (!cantDestroyStickies && m_bTouched && HasStickyEffects() && ( info.GetDamageType() & (DMG_BULLET|DMG_BUCKSHOT|DMG_BLAST|DMG_SONIC|DMG_MELEE) ) )
 		{
 			Vector vecForce = info.GetDamageForce();
 
