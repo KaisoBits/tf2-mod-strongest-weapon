@@ -601,16 +601,16 @@ float CTFBaseRocket::GetRadius()
 
 		CTFPlayer *pTFPlayer = ToTFPlayer( pAttacker );
 		// Airstrike gets a small blast radius penalty while Rjing
-		if ( pTFPlayer && pTFPlayer->m_Shared.InCond( TF_COND_BLASTJUMPING ) )
-		{
-			// Using this attr to key in the AirStrike
-			float flRocketJumpAttackBonus = 1.0f;
-			CALL_ATTRIB_HOOK_FLOAT_ON_OTHER( pAttacker, flRocketJumpAttackBonus, rocketjump_attackrate_bonus );
-			if ( flRocketJumpAttackBonus != 1.0f )
-			{
-				flRadius *= 0.80;
-			}
-		}
+		//if ( pTFPlayer && pTFPlayer->m_Shared.InCond( TF_COND_BLASTJUMPING ) )
+		//{
+		//	// Using this attr to key in the AirStrike
+		//	float flRocketJumpAttackBonus = 1.0f;
+		//	CALL_ATTRIB_HOOK_FLOAT_ON_OTHER( pAttacker, flRocketJumpAttackBonus, rocketjump_attackrate_bonus );
+		//	if ( flRocketJumpAttackBonus != 1.0f )
+		//	{
+		//		flRadius *= 0.80;
+		//	}
+		//}
 	}
 
 	return flRadius; 
