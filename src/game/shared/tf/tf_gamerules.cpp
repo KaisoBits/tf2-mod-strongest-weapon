@@ -6187,11 +6187,11 @@ bool CTFGameRules::ApplyOnDamageModifyRules( CTakeDamageInfo &info, CBaseEntity 
 				{
 					int iDashCount = 0;
 					CALL_ATTRIB_HOOK_INT_ON_OTHER( pTFAttacker->GetActiveTFWeapon(), iDashCount, air_dash_count );
-					if ( iDashCount )
-					{
-						info.SetCritType( CTakeDamageInfo::CRIT_MINI );
-						eBonusEffect = kBonusEffect_MiniCrit;
-					}
+					//if ( iDashCount )
+					//{
+					//	info.SetCritType( CTakeDamageInfo::CRIT_MINI );
+					//	eBonusEffect = kBonusEffect_MiniCrit;
+					//}
 				}
 			}
 			else if ( pVictim && pTFAttacker && pTFAttacker->IsPlayerClass( TF_CLASS_SNIPER ) && pWeapon && WeaponID_IsSniperRifle( pWeapon->GetWeaponID() ) )
