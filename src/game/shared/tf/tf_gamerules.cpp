@@ -6020,18 +6020,18 @@ bool CTFGameRules::ApplyOnDamageModifyRules( CTakeDamageInfo &info, CBaseEntity 
 				toEnt.z = 0;
 				toEnt.NormalizeInPlace();
 
-				if ( DotProduct( toEnt, entForward ) > 0.0f )	// 90 degrees from center (total of 180)
-				{
+				//if ( DotProduct( toEnt, entForward ) > 0.0f )	// 90 degrees from center (total of 180)
+				//{
 					bitsDamage |= DMG_CRITICAL;
 					info.AddDamageType( DMG_CRITICAL );
 					info.SetCritType( CTakeDamageInfo::CRIT_FULL );
-				}
-				else
-				{
-					bAllSeeCrit = true;
-					info.SetCritType( CTakeDamageInfo::CRIT_MINI );
-					eBonusEffect = kBonusEffect_MiniCrit;
-				}
+				//}
+				//else
+				//{
+				//	bAllSeeCrit = true;
+				//	info.SetCritType( CTakeDamageInfo::CRIT_MINI );
+				//	eBonusEffect = kBonusEffect_MiniCrit;
+				//}
 			}
 		}
 	}
