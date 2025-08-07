@@ -7239,6 +7239,16 @@ float CTFGameRules::ApplyOnDamageAliveModifyRules( const CTakeDamageInfo &info, 
 					pVictim->PlayDamageResistSound( flOriginalDamage, flDamageBase );
 				}
 			}
+
+			if (pVictim->IsPlayerClass(TF_CLASS_HEAVYWEAPONS) && pVictim->m_Shared.InCond(TF_COND_AIMING))
+			{
+				float flOriginalDamage = flDamageBase;
+				CALL_ATTRIB_HOOK_FLOAT_ON_OTHER(pVictim, flDamageBase, always_spunup_damage_resistance);
+				if (flOriginalDamage != flDamageBase)
+				{
+					pVictim->PlayDamageResistSound(flOriginalDamage, flDamageBase);
+				}
+			}
 		}
 
 		// If the damage changed at all play the resist sound
