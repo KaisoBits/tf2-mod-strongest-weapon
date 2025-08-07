@@ -5646,9 +5646,10 @@ void CTFGameRules::RadiusDamage( CTFRadiusDamageInfo &info )
 				CALL_ATTRIB_HOOK_INT_ON_OTHER( info.dmgInfo->GetWeapon(), iModHealthOnHit, add_health_on_radius_damage );
 				if ( iModHealthOnHit )
 				{
+					iModHealthOnHit *= iDamageEnemies;
 					// Scale Health mod with damage dealt, input being the maximum amount of health possible
-					float flScale = Clamp( nDamageDealt / flBaseDamage, 0.f, 1.0f );
-					iModHealthOnHit = (int)( (float)iModHealthOnHit * flScale );
+					//float flScale = 1; /*Clamp( nDamageDealt / flBaseDamage, 0.f, 1.0f );*/
+					/*iModHealthOnHit = (int)( (float)iModHealthOnHit * flScale );*/
 					int iHealed = info.dmgInfo->GetAttacker()->TakeHealth( iModHealthOnHit, DMG_GENERIC );
 					if ( iHealed )
 					{
