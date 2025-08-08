@@ -997,8 +997,11 @@ int CTFGrenadePipebombProjectile::OnTakeDamage( const CTakeDamageInfo &info )
 			}
 			else if ( info.GetDamageType() & DMG_BLAST )
 			{
+				int cantDamageStickiesWithAltFire = 0;
+				CALL_ATTRIB_HOOK_INT_ON_OTHER(info.GetWeapon(), cantDamageStickiesWithAltFire, cant_damage_stickies_with_alt_fire)
+
 				// if we're also supposed to ignite then just destroy the sticky bomb (Cow Mangler alt-fire)
-				if ( info.GetDamageType() & DMG_IGNITE )
+				if ( !cantDamageStickiesWithAltFire && (info.GetDamageType() & DMG_IGNITE) )
 				{
 					bBreakPipes = true;
 				}

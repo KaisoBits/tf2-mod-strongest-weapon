@@ -52,7 +52,7 @@ END_DATADESC()
 #endif
 
 #ifdef GAME_DLL
-const float tf_particle_cannon_afterburn_rate = 6.f;
+const float tf_particle_cannon_afterburn_rate = 10.f;
 #endif // GAME_DLL
 
 //-----------------------------------------------------------------------------

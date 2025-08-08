@@ -6262,6 +6262,7 @@ float CTFWeaponBase::Energy_GetMaxEnergy( void ) const
 
 	int iNumShots = ENERGY_WEAPON_MAX_CHARGE / Energy_GetShotCost();
 	CALL_ATTRIB_HOOK_FLOAT( iNumShots, mult_clipsize_upgrade );
+	CALL_ATTRIB_HOOK_FLOAT( iNumShots, mult_clipsize);
 
 	return ( iNumShots * Energy_GetShotCost() );
 }
