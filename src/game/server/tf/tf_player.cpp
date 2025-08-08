@@ -3411,9 +3411,11 @@ bool CTFPlayer::ApplyPunchImpulseX ( float flImpulse )
 		if ( pWeapon && WeaponID_IsSniperRifle( pWeapon->GetWeaponID() ) )
 		{
 			CTFSniperRifle *pRifle = static_cast< CTFSniperRifle* >( pWeapon );
-			if ( pRifle->IsFullyCharged() )
+
+			int iAimingNoFlinch = 0;
+			CALL_ATTRIB_HOOK_INT(iAimingNoFlinch, aiming_no_flinch_2);
+			if ( pRifle->IsFullyCharged() || iAimingNoFlinch > 0)
 			{
-				int iAimingNoFlinch = 0;
 				CALL_ATTRIB_HOOK_INT( iAimingNoFlinch, aiming_no_flinch );
 				if ( iAimingNoFlinch > 0 )
 				{
