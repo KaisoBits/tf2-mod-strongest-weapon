@@ -9666,14 +9666,12 @@ int CTFPlayer::OnTakeDamage( const CTakeDamageInfo &inputInfo )
 		if ( m_Shared.IsFeignDeathReady() )
 		{
 			m_Shared.SetFeignDeathReady( false );
-			if ( !m_Shared.InCond( TF_COND_TAUNTING ) )
-			{
-				SpyDeadRingerDeath( info );
+			/*if ( !m_Shared.InCond( TF_COND_TAUNTING ) )*/
+			SpyDeadRingerDeath( info );
 
-				if ( pTFAttacker )
-				{
-					pTFAttacker->IncrementKillCountSinceLastDeploy( info );
-				}
+			if ( pTFAttacker )
+			{
+				pTFAttacker->IncrementKillCountSinceLastDeploy( info );
 			}
 		}
 		else if ( !( info.GetDamageType() & DMG_FALL ) )
@@ -15678,14 +15676,14 @@ void CTFPlayer::SpyDeadRingerDeath( const CTakeDamageInfo& info )
 	if ( !CanGoInvisible( true ) || ( m_Shared.GetSpyCloakMeter() < 100.0f ) )
 		return;
 
-	m_Shared.SetSpyCloakMeter( 50.0f );
+	// m_Shared.SetSpyCloakMeter( 50.0f );
 
 	m_bGoingFeignDeath = true; 
 
 	FeignDeath( info, true );
 
 	// Go feign death.
-	m_Shared.AddCond( TF_COND_FEIGN_DEATH, tf_feign_death_duration.GetFloat() );
+	m_Shared.AddCond( TF_COND_FEIGN_DEATH );
 	m_bGoingFeignDeath = false;
 }
 

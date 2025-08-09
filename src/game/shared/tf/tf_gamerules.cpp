@@ -651,8 +651,8 @@ extern ConVar tf_mm_strict;
 extern ConVar mp_autoteambalance;
 
 // STAGING_SPY
-ConVar tf_feign_death_activate_damage_scale( "tf_feign_death_activate_damage_scale", "0.25", FCVAR_CHEAT | FCVAR_DEVELOPMENTONLY );
-ConVar tf_feign_death_damage_scale( "tf_feign_death_damage_scale", "0.35", FCVAR_CHEAT | FCVAR_DEVELOPMENTONLY );
+ConVar tf_feign_death_activate_damage_scale( "tf_feign_death_activate_damage_scale", "0.1", FCVAR_CHEAT | FCVAR_DEVELOPMENTONLY );
+ConVar tf_feign_death_damage_scale( "tf_feign_death_damage_scale", "0.1", FCVAR_CHEAT | FCVAR_DEVELOPMENTONLY );
 ConVar tf_stealth_damage_reduction( "tf_stealth_damage_reduction", "0.8", FCVAR_CHEAT | FCVAR_DEVELOPMENTONLY );
 
 // training
@@ -7370,7 +7370,7 @@ float CTFGameRules::ApplyOnDamageAliveModifyRules( const CTakeDamageInfo &info, 
 			if ( pVictim->m_Shared.InCond( TF_COND_FEIGN_DEATH ) || pVictim->m_Shared.IsFeignDeathReady() )
 			{
 				// Damage reduction is proportional to cloak remaining (60%->20%)
-				float flDamageReduction = RemapValClamped( pVictim->m_Shared.GetSpyCloakMeter(), 50.0f, 0.0f, tf_feign_death_damage_scale.GetFloat(), tf_stealth_damage_reduction.GetFloat() );
+				float flDamageReduction = 0.1f;
 
 				// On Activate Reduce Remaining Cloak by 50%
 				if ( pVictim->m_Shared.IsFeignDeathReady() )
