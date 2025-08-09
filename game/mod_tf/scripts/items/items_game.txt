@@ -17099,10 +17099,9 @@
 			"static_attrs"
 			{
 				"min_viewmodel_offset"					"10 0 -10"
-				"single wep deploy time decreased"		"0.4"
-				"switch from wep deploy time decreased"	"0.7"
-				"weapon burn dmg reduced"				"0.34"
-				"airblast cost increased"				"1.25"
+				"deploy time decreased"		"0.35"
+				"weapon burn dmg reduced"				"0.75"
+				"extinguish restores health"			"0"
 			}
 			"visuals"
 			{
