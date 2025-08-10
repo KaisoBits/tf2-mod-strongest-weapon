@@ -224044,7 +224044,7 @@
 		{
 			"name"	"cleaver description"
 			"attribute_class"	"desc_cleaver_description"
-			"description_string"	"#Attrib_Cleaver_Description"
+			"description_string"	"#Attrib_Cleaver_Description2"
 			"description_format"	"value_is_percentage"
 			"hidden"	"0"
 			"effect_type"	"positive"
