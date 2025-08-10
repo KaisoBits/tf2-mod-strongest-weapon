@@ -2258,12 +2258,12 @@ void CBaseObject::CreateObjectGibs( void )
 	int nMetalPerGib = nTotalMetal / m_aGibs.Count();
 	int nLeftOver = nTotalMetal % m_aGibs.Count();
 
-	if ( IsMiniBuilding() )
-	{
-		// STAGING_ENGY
-		nMetalPerGib = 0;
-		nLeftOver = 0;
-	}
+	//if ( IsMiniBuilding() )
+	//{
+	//	// STAGING_ENGY
+	//	nMetalPerGib = 0;
+	//	nLeftOver = 0;
+	//}
 
 	int i;
 	for ( i=0; i<m_aGibs.Count(); i++ )

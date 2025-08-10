@@ -375,7 +375,7 @@ void CObjectSentrygun::MakeMiniBuilding( CTFPlayer* pPlayer )
 	int iHealth = GetMaxHealthForCurrentLevel();
 
 	SetMaxHealth( iHealth );
-	SetHealth( iHealth / 2.0f );
+	SetHealth( iHealth );
 	SetBuildingSize();
 }
 
