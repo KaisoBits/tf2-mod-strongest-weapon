@@ -220935,7 +220935,7 @@
 		{
 			"name"	"mod mini-crit airborne"
 			"attribute_class"	"mini_crit_airborne"
-			"description_string"	"#Attrib_MiniCritAirborneEnemies"
+			"description_string"	"#Attrib_MiniCritAirborneEnemies2"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"positive"
