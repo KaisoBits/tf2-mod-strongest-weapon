@@ -112,7 +112,7 @@ float CTFShovel::GetMeleeDamage( CBaseEntity *pTarget, int* piDamageType, int* p
 		return 0;
 
 	float flOwnerHealthRatio = (float) pOwner->GetHealth() / (float) pOwner->GetMaxHealth();
-	float flDamageScale = RemapValClamped( flOwnerHealthRatio, 0.f, 1.f, 1.65f, 0.5f );
+	float flDamageScale = RemapValClamped( flOwnerHealthRatio, 0.f, 1.f, GetShovelType() == SHOVEL_DAMAGE_BOOST_AND_SPEED_BOOST ? 1.75 : 1.65f, 0.5f );
 
 	return flDamage * flDamageScale;
 }
@@ -208,7 +208,7 @@ float CTFShovel::GetForceScale( void )
 //-----------------------------------------------------------------------------
 int CTFShovel::GetDamageCustom()
 {
-	if ( GetShovelType() == SHOVEL_SPEED_BOOST || GetShovelType() == SHOVEL_DAMAGE_BOOST )
+	if ( GetShovelType() == SHOVEL_SPEED_BOOST || GetShovelType() == SHOVEL_DAMAGE_BOOST || GetShovelType() == SHOVEL_DAMAGE_BOOST_AND_SPEED_BOOST)
 	{
 		return TF_DMG_CUSTOM_PICKAXE;
 	}
