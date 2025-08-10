@@ -6235,7 +6235,7 @@ bool CTFGameRules::ApplyOnDamageModifyRules( CTakeDamageInfo &info, CBaseEntity 
 					{
 						int iMiniCritAirborne = 0;
 						CALL_ATTRIB_HOOK_INT_ON_OTHER( pWeapon, iMiniCritAirborne, mini_crit_airborne );
-						if ( iMiniCritAirborne == 1 &&	pVictim &&	( pVictim->InAirDueToExplosion() ) )
+						if ( iMiniCritAirborne == 1 && pVictim && !( pVictim->GetFlags() & FL_ONGROUND) )
 						{
 							bAllSeeCrit = true;
 							info.SetCritType( CTakeDamageInfo::CRIT_MINI );
