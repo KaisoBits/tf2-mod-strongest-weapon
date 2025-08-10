@@ -18393,7 +18393,7 @@
 				"rocket jump damage reduction"
 				{
 					"attribute_class"	"rocket_jump_dmg_reduction"
-					"value" "0.4"
+					"value" "0.25"
 				}
 				"allowed in medieval mode"
 				{
@@ -25250,7 +25250,7 @@
 				"rocket jump damage reduction"
 				{
 					"attribute_class"	"rocket_jump_dmg_reduction"
-					"value" "0.4"
+					"value" "0.25"
 				}
 				"allowed in medieval mode"
 				{
