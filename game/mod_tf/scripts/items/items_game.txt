@@ -33436,8 +33436,6 @@
 			"static_attrs"
 			{
 				"min_viewmodel_offset"					"10 0 -10"
-				"mult_patient_overheal_penalty_active"	"0.6"
-				"mult_health_fromhealers_penalty_active""0.6"
 			}	
 			"hide_bodygroups_deployed_only"	"1"
 			"visuals"
@@ -33465,17 +33463,12 @@
 				"dmg from ranged reduced"
 				{
 					"attribute_class"	"dmg_from_ranged"
-					"value"	"0.6"
+					"value"	"0.4"
 				}
 				"dmg from melee increased"
 				{
 					"attribute_class"	"dmg_from_melee"
 					"value"	"2.0"
-				}
-				"single wep holster time increased"
-				{
-					"attribute_class"	"mult_switch_from_wep_deploy_time"
-					"value"				"2.0"
 				}
 			}
 		}
