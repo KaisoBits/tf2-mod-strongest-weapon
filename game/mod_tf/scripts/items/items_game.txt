@@ -222310,7 +222310,7 @@
 		{
 			"name"	"speed buff ally"
 			"attribute_class"	"speed_buff_ally"
-			"description_string"	"#Attrib_SpeedBuffAlly"
+			"description_string"	"#Attrib_SpeedBuffAlly2"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"positive"

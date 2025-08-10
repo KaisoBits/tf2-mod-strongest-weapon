@@ -649,7 +649,7 @@ bool CTFWeaponBaseMelee::OnSwingHit( trace_t &trace )
 			CALL_ATTRIB_HOOK_INT( iSpeedBuffOnHit, speed_buff_ally );
 			if ( iSpeedBuffOnHit > 0 && trace.m_pEnt )
 			{
-				pTargetPlayer->m_Shared.AddCond( TF_COND_SPEED_BOOST, 2.f );
+				pTargetPlayer->m_Shared.AddCond( TF_COND_SPEED_BOOST, 3.f );
 				pPlayer->m_Shared.AddCond( TF_COND_SPEED_BOOST, 3.6f );		// give the soldier a bit of additional time to allow them to keep up better with faster classes
 
 				EconEntity_OnOwnerKillEaterEvent( this, pPlayer, pTargetPlayer, kKillEaterEvent_TeammatesWhipped );	// Strange
