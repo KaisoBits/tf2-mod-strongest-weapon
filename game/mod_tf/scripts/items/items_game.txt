@@ -48526,15 +48526,10 @@
 					"attribute_class"	"set_weapon_mode"
 					"value"	"2"
 				}
-				"reduced_healing_from_medics"
+				"mod weapon blocks healing"
 				{
-					"attribute_class"	"mult_healing_from_medics"
-					"value" "0.1"
-				}
-				"self mark for death"
-				{
-					"attribute_class"	"self_mark_for_death"
-					"value"	"1"
+					"attribute_class"	"weapon_blocks_healing"
+					"value" "1"
 				}
 				"special taunt"
 				{
