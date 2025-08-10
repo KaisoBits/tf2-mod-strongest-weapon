@@ -607,7 +607,7 @@ void CObjectSentrygun::FinishUpgrading( void )
 //-----------------------------------------------------------------------------
 bool CObjectSentrygun::OnWrenchHit( CTFPlayer *pPlayer, CTFWrench *pWrench, Vector hitLoc )
 {
-	if ( IsDisposableBuilding() )
+	if ( IsDisposableBuilding() || IsMiniBuilding())
 		return false;
 
 	bool bDidWork = false;

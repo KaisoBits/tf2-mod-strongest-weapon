@@ -1390,10 +1390,6 @@ bool CBaseObject::StartBuilding( CBaseEntity *pBuilder )
 	else if ( IsMiniBuilding() )
 	{
 		int iHealth = GetMaxHealthForCurrentLevel();
-		if ( !IsDisposableBuilding() )
-		{
-			iHealth /= 2.0f;
-		}
 		SetHealth( iHealth );
 	}
 	else
@@ -2782,7 +2778,7 @@ bool CBaseObject::InputWrenchHit( CTFPlayer *pPlayer, CTFWrench *pWrench, Vector
 		bDidWork = OnWrenchHit( pPlayer, pWrench, hitLoc );
 //		bDidWork = false;
 	}
-	else if ( IsBuilding() )
+	else if ( IsBuilding() && !IsMiniBuilding() )
 	{
 		OnConstructionHit( pPlayer, pWrench, hitLoc );
 		bDidWork = true;

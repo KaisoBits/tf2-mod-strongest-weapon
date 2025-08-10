@@ -25677,7 +25677,7 @@
 				"engineer sentry build rate multiplier"
 				{
 					"attribute_class"	"sentry_build_rate_multiplier"
-					"value"		"2.5"
+					"value"		"4"
 				}
 				"crit mod disabled"
 				{
