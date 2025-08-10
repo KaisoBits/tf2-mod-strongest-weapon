@@ -38404,25 +38404,15 @@
 			"drop_sound"		"ui/item_light_gun_drop.wav"
 			"attributes"
 			{
-				"dmg pierces resists absorbs"
+				"damage bonus"
 				{
-					"attribute_class"	"mod_pierce_resists_absorbs"
-					"value"	"1"
-				}
-				"crit mod disabled"
-				{
-					"attribute_class"	"mult_crit_chance"
-					"value"	"0"
-				}
-				"fire rate penalty"
-				{
-					"attribute_class"	"mult_postfiredelay"
+					"attribute_class"	"mult_dmg"
 					"value"	"1.2"
 				}
-				"damage bonus while disguised"
+				"mult cloak rate"
 				{
-					"attribute_class"	"mult_dmg_disguised"
-					"value"	"1.2"
+					"attribute_class"	"mult_cloak_rate"
+					"value"	"0.5"
 				}
 			}
 			"visuals"
