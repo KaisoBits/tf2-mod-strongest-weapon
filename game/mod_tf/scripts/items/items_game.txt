@@ -36992,7 +36992,6 @@
 			{
 				"min_viewmodel_offset"			"10 0 -8"
 				"mult_player_movespeed_active"	"1.15"
-				"mod_maxhealth_drain_rate"		"5.0"
 			}
 			"attributes"
 			{
