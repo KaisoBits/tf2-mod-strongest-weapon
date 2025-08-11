@@ -36551,19 +36551,9 @@
 					"attribute_class"	"mult_projectile_speed"
 					"value"	"1.4"
 				}
-				"damage penalty"
-				{
-					"attribute_class"	"mult_dmg"
-					"value" "0.75"
-				}
-				"clip size bonus"
+				"clip size penalty"
 				{
 					"attribute_class"	"mult_clipsize"
-					"value" "1.25"
-				}
-				"rocket jump damage reduction"
-				{
-					"attribute_class"	"rocket_jump_dmg_reduction"
 					"value" "0.75"
 				}
 			}
