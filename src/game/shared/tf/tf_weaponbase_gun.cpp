@@ -720,7 +720,7 @@ CBaseEntity *CTFWeaponBaseGun::FirePipeBomb( CTFPlayer *pPlayer, int iPipeBombTy
 			
 			// Set the grenade size again. It was previously set in CTFWeaponBaseGrenadeProj::Spawn() 
 			// during CTFGrenadePipebombProjectile::Create() above, but SetModel() resets it to the model's bounds.
-			UTIL_SetSize( pProjectile, TF_GRENADE_PROJECTILE_MINS, TF_GRENADE_PROJECTILE_MAXS );
+			// UTIL_SetSize( pProjectile, TF_GRENADE_PROJECTILE_MINS, TF_GRENADE_PROJECTILE_MAXS );
 		}
 	}
 
