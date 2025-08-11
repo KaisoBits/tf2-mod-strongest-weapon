@@ -11527,7 +11527,7 @@ void CTFPlayer::OnKilledOther_Effects( CBaseEntity *pVictim, const CTakeDamageIn
 			iNewHealth = Min( GetHealth() + iTargetHealth, iBaseMaxHealth ),
 			iDeltaHealth = Max(iNewHealth - GetHealth(), 0);
 
-		TakeHealth( iDeltaHealth, DMG_IGNORE_MAXHEALTH );
+		TakeHealth( iDeltaHealth, DMG_GENERIC );
 	}
 
 	CALL_ATTRIB_HOOK_INT_ON_OTHER( pWeapon, iHealOnKill, heal_on_kill );

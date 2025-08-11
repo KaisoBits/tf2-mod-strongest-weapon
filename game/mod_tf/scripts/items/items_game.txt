@@ -34475,12 +34475,7 @@
 				"restore health on kill"
 				{
 					"attribute_class"	"restore_health_on_kill"
-					"value"	"50"
-				}
-				"crit mod disabled"
-				{
-					"attribute_class"	"mult_crit_chance"
-					"value"	"0"
+					"value"	"100"
 				}
 				"honorbound"
 				{
@@ -221977,7 +221972,7 @@
 		{
 			"name"	"restore health on kill"
 			"attribute_class"	"restore_health_on_kill"
-			"description_string"	"#Attrib_RestoreHealthOnKill"
+			"description_string"	"#Attrib_RestoreHealthOnKill2"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"positive"
@@ -222037,7 +222032,7 @@
 		{
 			"name"	"honorbound"
 			"attribute_class"	"honorbound"
-			"description_string"	"#Attrib_Honorbound"
+			"description_string"	"#Attrib_Honorbound2"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"negative"

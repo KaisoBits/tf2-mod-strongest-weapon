@@ -1150,7 +1150,7 @@ bool CTFWeaponBase::CanHolster( void ) const
 	CTFPlayer *pPlayer = ToTFPlayer( GetOwner() );
 	if ( pPlayer && ( pPlayer->GetActiveWeapon() != this || gpGlobals->curtime >= pPlayer->m_Shared.m_flFirstPrimaryAttack ) )
 	{
-		if ( IsHonorBound() && pPlayer->m_Shared.m_iKillCountSinceLastDeploy == 0 && pPlayer->GetHealth() <= 50 )
+		if ( IsHonorBound() && pPlayer->m_Shared.m_iKillCountSinceLastDeploy == 0 )
 		{
 #ifdef CLIENT_DLL
 			pPlayer->EmitSound( "Player.DenyWeaponSelection" );
@@ -1184,13 +1184,13 @@ bool CTFWeaponBase::Holster( CBaseCombatWeapon *pSwitchingTo )
 	}
 
 	// Honorbound hurt yourself
-	if ( pPlayer && ( pPlayer->GetActiveWeapon() != this || gpGlobals->curtime >= pPlayer->m_Shared.m_flFirstPrimaryAttack ) )
-	{
-		if ( IsHonorBound() && pPlayer->m_Shared.m_iKillCountSinceLastDeploy == 0 && pPlayer->GetHealth() > 0 && pPlayer->IsAlive() )
-		{
-			pPlayer->TakeDamage( CTakeDamageInfo( pPlayer, pPlayer, vec3_origin, pPlayer->WorldSpaceCenter(), 50.f, GetDamageType() | DMG_PREVENT_PHYSICS_FORCE ) );
-		}
-	}
+	//if ( pPlayer && ( pPlayer->GetActiveWeapon() != this || gpGlobals->curtime >= pPlayer->m_Shared.m_flFirstPrimaryAttack ) )
+	//{
+	//	if ( IsHonorBound() && pPlayer->m_Shared.m_iKillCountSinceLastDeploy == 0 && pPlayer->GetHealth() > 0 && pPlayer->IsAlive() )
+	//	{
+	//		pPlayer->TakeDamage( CTakeDamageInfo( pPlayer, pPlayer, vec3_origin, pPlayer->WorldSpaceCenter(), 50.f, GetDamageType() | DMG_PREVENT_PHYSICS_FORCE ) );
+	//	}
+	//}
 #endif
 
 	m_iReloadMode.Set( TF_RELOAD_START );
