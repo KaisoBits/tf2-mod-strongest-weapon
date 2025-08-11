@@ -9725,7 +9725,8 @@ int CTFPlayer::OnTakeDamage( const CTakeDamageInfo &inputInfo )
 
 	if ( pWeapon && ( ( pWeapon->GetWeaponID() == TF_WEAPON_BAT_FISH ) || ( pWeapon->GetWeaponID() == TF_WEAPON_SLAP ) ) )
 	{
-		bool bDisguised = m_Shared.InCond( TF_COND_DISGUISED ) && pTFAttacker && ( m_Shared.GetDisguiseTeam() == pTFAttacker->GetTeamNumber() );
+		bool bDisguised = ( pWeapon->GetWeaponID() != TF_WEAPON_BAT_FISH && m_Shared.InCond( TF_COND_DISGUISED ) ) 
+			&& pTFAttacker && ( m_Shared.GetDisguiseTeam() == pTFAttacker->GetTeamNumber() );
 		bool bFish = ( pWeapon->GetWeaponID() == TF_WEAPON_BAT_FISH );
 
 		if ( m_iHealth <= 0 )
