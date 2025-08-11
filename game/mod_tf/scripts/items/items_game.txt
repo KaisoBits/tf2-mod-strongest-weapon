@@ -18758,11 +18758,6 @@
 					"attribute_class"	"mult_dmg"
 					"value"	"0.75"
 				}
-				"dmg penalty vs buildings"
-				{
-					"attribute_class"	"mult_dmg_vs_buildings"
-					"value" "0.67"
-				}
 				"kill eater score type"
 				{
 					"attribute_class"	"kill_eater_score_type"
