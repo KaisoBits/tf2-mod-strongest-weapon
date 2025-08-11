@@ -19042,10 +19042,10 @@
 					"attribute_class"	"mult_clipsize"
 					"value" "0.75"
 				}
-				"dmg bonus vs buildings"
+				"damage bonus"
 				{
-					"attribute_class"	"mult_dmg_vs_buildings"
-					"value"	"1.2"
+					"attribute_class"	"mult_dmg"
+					"value"	"1.20"
 				}
 				"Projectile speed increased"
 				{
