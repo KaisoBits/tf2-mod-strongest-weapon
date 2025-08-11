@@ -17188,7 +17188,7 @@
 				"Projectile speed increased"
 				{
 					"attribute_class"	"mult_projectile_speed"
-					"value"	"1.2"
+					"value"	"1.5"
 				}
 				"cannonball push back"
 				{

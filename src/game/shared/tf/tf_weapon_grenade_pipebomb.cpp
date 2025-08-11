@@ -782,8 +782,7 @@ void CTFGrenadePipebombProjectile::PipebombTouch( CBaseEntity *pOther )
 				if ( !m_penetratedEntities.HasElement( pOther ) )
 				{
 					// Impact damage scales with distance
-					float flDistanceSq = (pOther->GetAbsOrigin() - pAttacker->GetAbsOrigin()).LengthSqr();
-					float flImpactDamage = RemapValClamped( flDistanceSq, 512 * 512, 1024 * 1024, 50, 25 );
+					float flImpactDamage = 60;
 
 					CTakeDamageInfo info( this, pAttacker, m_hLauncher, vec3_origin, vOrigin, flImpactDamage, GetDamageType(), TF_DMG_CUSTOM_CANNONBALL_PUSH );
 					pOther->TakeDamage( info );
@@ -792,10 +791,10 @@ void CTFGrenadePipebombProjectile::PipebombTouch( CBaseEntity *pOther )
 					if ( pVictim )
 					{
 						// apply airblast - Apply stun if they are effectively grounded so we can knock them up
-						if ( !pVictim->m_Shared.InCond( TF_COND_KNOCKED_INTO_AIR ) )
-						{
-							pVictim->m_Shared.StunPlayer( 0.5, 1.f, TF_STUN_MOVEMENT, ToTFPlayer( pAttacker ) );
-						}
+						//if ( !pVictim->m_Shared.InCond( TF_COND_KNOCKED_INTO_AIR ) )
+						//{
+						//	pVictim->m_Shared.StunPlayer( 0.5, 1.f, TF_STUN_MOVEMENT, ToTFPlayer( pAttacker ) );
+						//}
 
 						Vector vecToTarget = pVictim->WorldSpaceCenter() - pAttacker->WorldSpaceCenter();
 						VectorNormalize( vecToTarget );
