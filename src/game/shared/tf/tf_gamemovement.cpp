@@ -1020,11 +1020,13 @@ void CTFGameMovement::AirDash( void )
 		flJumpMod *= 1.8f;
 	}
 
+#if defined(GAME_DLL)
 	if (m_pTFPlayer->m_Shared.GetAirDash() >= 1)
 	{
 		CTakeDamageInfo info(m_pTFPlayer, m_pTFPlayer, 10, DMG_SLASH);
 		m_pTFPlayer->TakeDamage(info);
 	}
+#endif
 
   	float flDashZ = 268.3281572999747f * flJumpMod;
 
