@@ -1983,7 +1983,9 @@ int CObjectSentrygun::OnTakeDamage( const CTakeDamageInfo &info )
 		// Take less damage if the owner is causing additional damage.
 		if ( pSapper && ( info.GetAttacker() == pSapper->GetOwner() ) )
 		{
-			float flDamage = newInfo.GetDamage() * SENTRYGUN_SAPPER_OWNER_DAMAGE_MODIFIER;
+			bool flSapperDoesDamage = pSapper->GetReversesBuildingConstructionSpeed() == 0.0f;
+
+			float flDamage = newInfo.GetDamage() * (flSapperDoesDamage ? SENTRYGUN_SAPPER_OWNER_DAMAGE_MODIFIER : 0.33f);
 			newInfo.SetDamage( flDamage );
 		}
 	}
