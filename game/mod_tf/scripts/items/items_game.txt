@@ -36300,7 +36300,12 @@
 				"ubercharge rate bonus"
 				{
 					"attribute_class"	"mult_medigun_uberchargerate"
-					"value"	"1.1"
+					"value"	"1.25"
+				}
+				"capture while ubered"
+				{
+					"attribute_class"	"capture_while_ubered"
+					"value"	"1"
 				}
 				"overheal penalty"
 				{
@@ -227013,6 +227018,16 @@
 			"name"	"mod shovel damage and speed boost"
 			"attribute_class"	"set_weapon_mode"
 			"description_string"	"#Attrib_ShovelDamageAndSpeedBoost2"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"positive"
+			"stored_as_integer"	"0"
+		}
+		"892"
+		{
+			"name"	"capture while ubered"
+			"attribute_class"	"capture_while_ubered"
+			"description_string"	"#Attrib_CaptureWhileUbered"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"positive"

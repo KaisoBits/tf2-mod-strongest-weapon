@@ -16821,7 +16821,10 @@ bool CTFGameRules::PlayerMayCapturePoint( CBasePlayer *pPlayer, int iPointIndex,
 		}
 		return false;
 	}
-	if ( ( pTFPlayer->m_Shared.IsInvulnerable() || pTFPlayer->m_Shared.InCond( TF_COND_MEGAHEAL ) ) && !IsMannVsMachineMode() )
+	int canCapWhileUbered = 0;
+	CALL_ATTRIB_HOOK_INT_ON_OTHER(pPlayer, canCapWhileUbered, capture_while_ubered);
+
+	if ( ( pTFPlayer->m_Shared.IsInvulnerable() || (pTFPlayer->m_Shared.InCond( TF_COND_MEGAHEAL ) && canCapWhileUbered == 0) ) && !IsMannVsMachineMode() )
 	{
 		if ( pszReason )
 		{
