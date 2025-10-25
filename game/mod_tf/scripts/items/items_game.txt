@@ -19891,7 +19891,8 @@
 			"static_attrs"
 			{
 				"min_viewmodel_offset"					"10 0 -10"
-				"weapon_stattrak_module_scale"				"0.608"				
+				"weapon_stattrak_module_scale"				"0.608"	
+				"deploy time decreased"		"0.85"			
 			}
 			"model_player"	"models/workshop/weapons/c_models/c_reserve_shooter/c_reserve_shooter.mdl"
 			"visuals"
@@ -19906,15 +19907,10 @@
 					"attribute_class"	"mult_clipsize"
 					"value" "0.66"
 				}
-				"mod mini-crit airborne"
+				"mod mini-crit airborne deploy"
 				{
-					"attribute_class"	"mini_crit_airborne"
-					"value" "1"
-				}
-				"single wep deploy time decreased"
-				{
-					"attribute_class"	"mult_single_wep_deploy_time"
-					"value"	"0.80"
+					"attribute_class"	"mini_crit_airborne_deploy"
+					"value"	"5"
 				}
 				"special taunt"
 				{
@@ -222397,7 +222393,7 @@
 		{
 			"name"	"mod mini-crit airborne deploy"
 			"attribute_class"	"mini_crit_airborne_deploy"
-			"description_string"	"#Attrib_MiniCritAirborneEnemiesDeploy"
+			"description_string"	"#Attrib_MiniCritAirborneEnemiesDeploy2"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"positive"
