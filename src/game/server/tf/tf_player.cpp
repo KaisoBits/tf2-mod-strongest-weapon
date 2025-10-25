@@ -17908,6 +17908,11 @@ void CTFPlayer::Taunt( taunts_t iTauntIndex, int iTauntConcept )
 					//m_Shared.AddCond( TF_COND_DEFENSEBUFF_HIGH, 3.0f );
 					m_Shared.AddCond( TF_COND_INVULNERABLE_USER_BUFF, 2.60f );
 					m_Shared.AddCond( TF_COND_MEGAHEAL, 2.60f );
+					
+					if (GetHealth() < GetMaxHealth())
+					{
+						SetHealth(GetMaxHealth());
+					}
 				}
 			}
 		}

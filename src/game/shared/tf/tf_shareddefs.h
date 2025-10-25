@@ -2761,7 +2761,7 @@ static const RageBuffType g_RageBuffTypes[] =
 	{ kRageBuffFlag_OnDamageDealt,			1.f,	10 },	// buff type 2
 	{ kRageBuffFlag_OnDamageDealt,			1.25f,	10 },	// buff type 3
 	{ kRageBuffFlag_OnMedicHealingReceived,	1.f,	10 },	// buff type 4
-	{ kRageBuffFlag_OnBurnDamageDealt,		1.f,	10 },	// pyro rage
+	{ kRageBuffFlag_OnBurnDamageDealt,		1.33f,	10 },	// pyro rage
 	{ kRageBuffFlag_OnHeal,					1.f,	10 },	// medic healing
 };
 
