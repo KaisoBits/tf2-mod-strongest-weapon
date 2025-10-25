@@ -17269,25 +17269,15 @@
 					"attribute_class"	"is_a_sword"
 					"value"				"72"
 				}
-				"maxammo primary reduced"
+				"charge recharge rate increased"
 				{
-					"attribute_class"	"mult_maxammo_primary"
-					"value"				"0.20"
+					"attribute_class"	"charge_recharge_rate"
+					"value"	"2"
 				}
-				"maxammo secondary reduced"
+				"ammo becomes health"
 				{
-					"attribute_class"	"mult_maxammo_secondary"
-					"value"				"0.20"
-				}
-				"ammo gives charge"
-				{
-					"attribute_class"	"ammo_gives_charge"
-					"value"				"1"
-				}
-				"charge meter on hit"
-				{
-					"attribute_class"	"charge_meter_on_hit"
-					"value"			"0.20"
+					"attribute_class"	"ammo_becomes_health"
+					"value" "1"
 				}
 				"crit mod disabled"
 				{
