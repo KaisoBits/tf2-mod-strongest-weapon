@@ -104,7 +104,7 @@ PRECACHE_WEAPON_REGISTER( tf_projectile_stun_ball );
 #define TF_WEAPON_STUNBALL_MODEL			"models/weapons/w_models/w_baseball.mdl"
 
 #if defined( GAME_DLL )
-ConVar tf_scout_stunball_base_duration( "tf_scout_stunball_base_duration", "6.0", FCVAR_DEVELOPMENTONLY );
+ConVar tf_scout_stunball_base_duration( "tf_scout_stunball_base_duration", "7.0", FCVAR_DEVELOPMENTONLY );
 ConVar tf_scout_stunball_base_speed( "tf_scout_stunball_base_speed", "3000", FCVAR_DEVELOPMENTONLY );
 ConVar sv_proj_stunball_damage( "sv_proj_stunball_damage", "15", FCVAR_DEVELOPMENTONLY );
 #endif
@@ -252,8 +252,55 @@ void CTFBat_Wood::GetBallDynamics( Vector& vecLoc, QAngle& vecAngles, Vector& ve
 //-----------------------------------------------------------------------------
 // Purpose:
 //-----------------------------------------------------------------------------
+void CTFBat_Wood::PrimaryAttack()
+{
+	if (GetWeaponID() != TF_WEAPON_BAT_WOOD)
+	{
+		BaseClass::PrimaryAttack();
+		return; // Only wood bat primary fire shoots ball
+	}
+
+	CTFPlayer* pPlayer = GetTFPlayerOwner();
+	if (!pPlayer)
+		return;
+
+	if (!CanAttack())
+		return;
+
+	if (m_flNextPrimaryAttack > gpGlobals->curtime)
+		return;
+
+	// Do we have any balls? If so, use them.
+	int iBallCount = pPlayer->GetAmmoCount(TF_AMMO_GRENADES1);
+	if ((iBallCount > 0) && CanCreateBall(pPlayer))
+	{
+		SecondaryAttackAnim(pPlayer);
+		SendWeaponAnim(ACT_VM_PRIMARYATTACK);
+
+		SetContextThink(&CTFBat_Wood::LaunchBallThink, gpGlobals->curtime + tf_scout_bat_launch_delay.GetFloat(), "LAUNCH_BALL_THINK");
+
+		m_flNextPrimaryAttack = gpGlobals->curtime + 0.25;
+
+#ifdef GAME_DLL
+		if (pPlayer->m_Shared.IsStealthed())
+		{
+			pPlayer->RemoveInvisibility();
+		}
+#endif // GAME_DLL
+
+		pPlayer->m_Shared.OnAttack();
+	}
+	else
+	{
+		BaseClass::PrimaryAttack();
+	}
+}
+
 void CTFBat_Wood::SecondaryAttack( void )
 {
+	if (GetWeaponID() == TF_WEAPON_BAT_WOOD)
+		return; // Primary fire shoots ball
+
 	CTFPlayer *pPlayer = GetTFPlayerOwner();
 	if ( !pPlayer )
 		return;
@@ -722,51 +769,35 @@ void CTFStunBall::ApplyBallImpactEffectOnVictim( CBaseEntity *pOther )
 	if ( m_bTouched )
 		return;
 
-	// Can't stun an invul player.
-	if ( pPlayer->m_Shared.IsInvulnerable() || pPlayer->m_Shared.InCond( TF_COND_INVULNERABLE_WEARINGOFF ) )
-		return;
-
-	// We have a more intense stun based on our travel time.
 	float flLifeTime = Min( gpGlobals->curtime - m_flCreationTime, FLIGHT_TIME_TO_MAX_STUN );
 	float flLifeTimeRatio = flLifeTime / FLIGHT_TIME_TO_MAX_STUN;
-	if ( flLifeTimeRatio > 0.1f )
+	bool bMax = flLifeTimeRatio >= 1.f;
+	int iStunFlags = ( bMax ) ? TF_STUN_SPECIAL_SOUND | TF_STUN_MOVEMENT | TF_STUN_CONTROLS : TF_STUN_SOUND | TF_STUN_MOVEMENT | TF_STUN_CONTROLS;
+	float flStunAmount = 0.5f;
+
+	// MvM bots
+	if ( TFGameRules() && TFGameRules()->GameModeUsesUpgrades() && pPlayer->IsBot() )
 	{
-		bool bMax = flLifeTimeRatio >= 1.f;
-		int iStunFlags = ( bMax ) ? TF_STUN_SPECIAL_SOUND | TF_STUN_MOVEMENT : TF_STUN_SOUND | TF_STUN_MOVEMENT;
-		float flStunAmount = 0.5f;
-		float flStunDuration = Max( 2.f, tf_scout_stunball_base_duration.GetFloat() * flLifeTimeRatio );
-		if ( bMax )
+		bool bBoss = TFGameRules() && TFGameRules()->GameModeUsesMiniBosses() && ( pPlayer->IsMiniBoss() || pPlayer->GetModelScale() > 1.0f );
+		if ( bMax && !bBoss )
 		{
-			flStunDuration += 1.0;
+			iStunFlags |= TF_STUN_CONTROLS; 
 		}
+	}
 
-		// MvM bots
-		if ( TFGameRules() && TFGameRules()->GameModeUsesUpgrades() && pPlayer->IsBot() )
+	CTF_GameStats.Event_PlayerStunBall( pOwner, ( bMax ) ? true : false );
+
+	if ( pPlayer->GetWaterLevel() != WL_Eyes )
+	{
+		pPlayer->m_Shared.StunPlayer( tf_scout_stunball_base_duration.GetFloat(), 1.f, iStunFlags, pOwner );
+
+		if ( pPlayer->GetUserID() == m_iOriginalOwnerID )
 		{
-			// Distance mod
-			flStunAmount = ( bMax ) ? 1.f : RemapValClamped( flLifeTimeRatio, 0.1f, 0.99f, 0.5f, 0.75 );
-
-			bool bBoss = TFGameRules() && TFGameRules()->GameModeUsesMiniBosses() && ( pPlayer->IsMiniBoss() || pPlayer->GetModelScale() > 1.0f );
-			if ( bMax && !bBoss )
+			// We just stunned a scout with their own ball.
+			// Give the player an achievement for this.
+			if ( pOwner->IsPlayerClass( TF_CLASS_SCOUT ) )
 			{
-				iStunFlags |= TF_STUN_CONTROLS; 
-			}
-		}
-
-		CTF_GameStats.Event_PlayerStunBall( pOwner, ( bMax ) ? true : false );
-
-		if ( pPlayer->GetWaterLevel() != WL_Eyes )
-		{
-			pPlayer->m_Shared.StunPlayer( flStunDuration, flStunAmount, iStunFlags, pOwner );
-
-			if ( pPlayer->GetUserID() == m_iOriginalOwnerID )
-			{
-				// We just stunned a scout with their own ball.
-				// Give the player an achievement for this.
-				if ( pOwner->IsPlayerClass( TF_CLASS_SCOUT ) )
-				{
-					pOwner->AwardAchievement( ACHIEVEMENT_TF_SCOUT_STUN_SCOUT_WITH_THEIR_BALL );
-				}
+				pOwner->AwardAchievement( ACHIEVEMENT_TF_SCOUT_STUN_SCOUT_WITH_THEIR_BALL );
 			}
 		}
 	}

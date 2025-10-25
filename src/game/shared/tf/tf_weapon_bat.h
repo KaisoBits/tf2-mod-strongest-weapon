@@ -80,6 +80,7 @@ public:
 	virtual int			GetWeaponID( void ) const			{ return TF_WEAPON_BAT_WOOD; }
 	virtual bool		BatDeflects() { return false; }
 
+	virtual void		PrimaryAttack( void );
 	virtual void		SecondaryAttack( void );
 	void				SecondaryAttackAnim( CTFPlayer *pPlayer );
 	virtual bool		SendWeaponAnim( int iActivity );
