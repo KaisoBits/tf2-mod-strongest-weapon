@@ -223379,7 +223379,7 @@
 		{
 			"name"	"burn damage earns rage"
 			"attribute_class"	"burn_damage_earns_rage"
-			"description_string"	"#Attrib_BurnDamageEarnsRage"
+			"description_string"	"#Attrib_BurnDamageEarnsRage2"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"positive"
