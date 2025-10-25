@@ -598,11 +598,10 @@ bool CTFPipebombLauncher::ModifyPipebombsInView( int iEffect )
 		vecPlayerForward.NormalizeInPlace();
 
 		bool bArmed = ( ( gpGlobals->curtime - pTemp->m_flCreationTime ) > pTemp->GetLiveTime() );
-		float flDist = pPlayer->GetAbsOrigin().DistTo( pTemp->GetAbsOrigin() );
 		float flDot = DotProduct( vecToTarget, vecPlayerForward );
 
 		// Detonate sticky bombs directly under the crosshair or under our feet (to allow sticky jumping)
-		if ( flDot > 0.975f || flDist < pTemp->GetDamageRadius() )
+		if ( flDot > 0.975f )
 		{
 			switch ( iEffect )
 			{

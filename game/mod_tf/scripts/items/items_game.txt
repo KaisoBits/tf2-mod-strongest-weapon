@@ -25151,11 +25151,6 @@
 			}
 			"attributes"
 			{
-				"fire rate bonus"
-				{
-					"attribute_class"	"mult_postfiredelay"
-					"value" "0.75"
-				}
 				"sticky detonate mode"
 				{
 					"attribute_class"	"set_detonate_mode"
@@ -25179,7 +25174,7 @@
 				"sticky arm time penalty"
 				{
 					"attribute_class"	"sticky_arm_time"
-					"value"	"0.8"
+					"value"	"0.4"
 				}
 			}
 			"mouse_pressed_sound"	"ui/item_heavy_gun_pickup.wav"
