@@ -42566,6 +42566,11 @@
 					"attribute_class"	"energy_weapon_no_ammo"
 					"value" "1"
 				}
+				"energy weapon penetration"
+				{
+					"attribute_class"	"energy_weapon_penetration"
+					"value" "1"
+				}
 				"energy weapon no deflect"
 				{
 					"attribute_class"	"energy_weapon_no_deflect"
@@ -223073,7 +223078,7 @@
 		{
 			"name"	"subtract victim medigun charge on hit"
 			"attribute_class"	"subtract_victim_medigun_charge_onhit"
-			"description_string"	"#Attrib_SubtractVictimMedigunChargeOnHit"
+			"description_string"	"#Attrib_SubtractVictimMedigunChargeOnHit2"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"positive"
@@ -223084,7 +223089,7 @@
 		{
 			"name"	"subtract victim cloak on hit"
 			"attribute_class"	"subtract_victim_cloak_on_hit"
-			"description_string"	"#Attrib_SubtractVictimCloakOnHit"
+			"description_string"	"#Attrib_SubtractVictimCloakOnHit2"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"positive"

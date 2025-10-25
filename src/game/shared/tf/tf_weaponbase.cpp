@@ -5473,11 +5473,11 @@ void CTFWeaponBase::ApplyPostHitEffects( const CTakeDamageInfo &info, CTFPlayer 
 				{
 					// STAGING_ENGY
 					// Scale drain after 512 Hu to 1536Hu ( 50% drain at 1024, 0 drain at 1536 units )
-					Vector toEnt = pVictim->GetAbsOrigin() - pAttacker->GetAbsOrigin();
-					if ( toEnt.LengthSqr() > Square( 512.0f ) )
-					{
-						iSubtractVictimMedigunChargeOnHit *= RemapValClamped( toEnt.LengthSqr(), (512.0f * 512.0f), (1536.0f * 1536.0f), 1.0f, 0.0f );
-					}	
+					//Vector toEnt = pVictim->GetAbsOrigin() - pAttacker->GetAbsOrigin();
+					//if ( toEnt.LengthSqr() > Square( 512.0f ) )
+					//{
+					//	iSubtractVictimMedigunChargeOnHit *= RemapValClamped( toEnt.LengthSqr(), (512.0f * 512.0f), (1536.0f * 1536.0f), 1.0f, 0.0f );
+					//}	
 
 					pMedigun->SubtractCharge( iSubtractVictimMedigunChargeOnHit / 100.0f );
 					bDidDrain = true;
@@ -5494,11 +5494,11 @@ void CTFWeaponBase::ApplyPostHitEffects( const CTakeDamageInfo &info, CTFPlayer 
 			{
 				// STAGING_ENGY
 				// Scale drain after 512 Hu to 1536Hu ( 50% drain at 1024, 0 drain at 1536 units )
-				Vector toEnt = pVictim->GetAbsOrigin() - pAttacker->GetAbsOrigin();
-				if ( toEnt.LengthSqr() > Square( 512.0f ) )
-				{
-					iSubtractVictimCloakOnHit *= RemapValClamped( toEnt.LengthSqr(), (512.0f * 512.0f), (1536.0f * 1536.0f), 1.0f, 0.0f );
-				}
+				//Vector toEnt = pVictim->GetAbsOrigin() - pAttacker->GetAbsOrigin();
+				//if ( toEnt.LengthSqr() > Square( 512.0f ) )
+				//{
+				//	iSubtractVictimCloakOnHit *= RemapValClamped( toEnt.LengthSqr(), (512.0f * 512.0f), (1536.0f * 1536.0f), 1.0f, 0.0f );
+				//}
 
 				float flCloak = pVictim->m_Shared.GetSpyCloakMeter();
 				flCloak -= iSubtractVictimCloakOnHit;
