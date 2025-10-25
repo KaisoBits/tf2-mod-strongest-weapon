@@ -222704,7 +222704,7 @@
 		{
 			"name"	"electrical airblast DISPLAY ONLY"
 			"attribute_class"	"electrical_airblast_DISPLAY_ONLY"
-			"description_string"	"#Attrib_ElectricalAirblast"
+			"description_string"	"#Attrib_ElectricalAirblast2"
 			"description_format"	"value_is_additive_percentage"
 			"hidden"	"0"
 			"effect_type"	"positive"
