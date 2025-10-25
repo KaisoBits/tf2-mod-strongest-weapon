@@ -20154,7 +20154,7 @@
 			}
 			"base_item_name"	"The Sandvich"
 			"item_name"	"#TF_Unique_Achievement_LunchBox"
-			"item_description"	"#TF_Sandvich_desc"
+			"item_description"	"#TF_Sandvich_desc2"
 			"inspect_panel_dist" "31"
 			"image_inventory"	"backpack/weapons/c_models/c_sandwich/c_sandwich"
 			"model_player"	"models/weapons/c_models/c_sandwich/c_sandwich.mdl"			
@@ -23112,10 +23112,10 @@
 					"attribute_class"	"set_weapon_mode"
 					"value"	"1"
 				}
-				"max health additive penalty"
+				"no double jump"
 				{
-					"attribute_class"	"add_maxhealth"
-					"value" "-15"
+					"attribute_class"	"set_scout_doublejump_disabled"
+					"value"	"1"
 				}
 				"special taunt"
 				{
@@ -220089,7 +220089,7 @@
 		{
 			"name"	"mod bat launches balls"
 			"attribute_class"	"set_weapon_mode"
-			"description_string"	"#Attrib_BatLaunchesBalls"
+			"description_string"	"#Attrib_BatLaunchesBalls2"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"positive"

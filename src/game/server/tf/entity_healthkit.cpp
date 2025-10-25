@@ -76,8 +76,10 @@ bool CHealthKit::MyTouch( CBasePlayer *pPlayer )
 
 		bool bPerformPickup = false;
 
-		// In the case of sandvich's owner, only restore ammo
-		if ( GetOwnerEntity() == pPlayer && bIsAnyHeavyWithSandvichEquippedPickingUp )
+		auto owner = GetOwnerEntity();
+
+		// In the case of sandvich's owner with full hp, only restore ammo
+		if ( owner == pPlayer && bIsAnyHeavyWithSandvichEquippedPickingUp && owner->GetHealth() >= owner->GetMaxHealth())
 		{
 			if ( pPlayer->GiveAmmo( 1, TF_AMMO_GRENADES1, false ) )
 			{
