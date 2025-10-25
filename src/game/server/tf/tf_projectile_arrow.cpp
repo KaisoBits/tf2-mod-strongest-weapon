@@ -673,14 +673,16 @@ void CTFProjectile_Arrow::BuildingHealingArrow( CBaseEntity *pOther )
 		return;
 
 	// if building is shielded, reduce health gain
-	if ( pBuilding->GetShieldLevel() == SHIELD_NORMAL )
-	{
-		iArrowHealAmount *= SHIELD_NORMAL_VALUE;
-	}
+	//if ( pBuilding->GetShieldLevel() == SHIELD_NORMAL )
+	//{
+	//	iArrowHealAmount *= SHIELD_NORMAL_VALUE;
+	//}
 
-	int nHealed = pBuilding->Command_Repair( pTFAttacker, iArrowHealAmount, 1.f, 4.f, true );
+	int nHealed = MIN(pBuilding->GetMaxHealth() - pBuilding->GetHealth(), 75);
 	if ( nHealed > 0 )
 	{
+		pBuilding->SetHealth(pBuilding->GetHealth() + nHealed);
+
 		const char *pParticleName = GetTeamNumber() == TF_TEAM_BLUE ? CLAW_REPAIR_EFFECT_BLU : CLAW_REPAIR_EFFECT_RED;
 		CPVSFilter filter( GetAbsOrigin() );
 		TE_TFParticleEffect( filter, 0.0, pParticleName, GetAbsOrigin(), vec3_angle );
