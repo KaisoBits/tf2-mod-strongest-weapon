@@ -29538,11 +29538,6 @@
 					"attribute_class"	"mult_dmg"
 					"value"	"0"
 				}
-				"crit mod disabled"
-				{
-					"attribute_class"	"mult_crit_chance"
-					"value"	"0"
-				}
 				"no self blast dmg"
 				{
 					"attribute_class"	"no_self_blast_dmg"
@@ -29552,11 +29547,6 @@
 				{
 					"attribute_class"	"mult_maxammo_primary"
 					"value" "3.0"
-				}
-				"cannot pick up intelligence"
-				{
-					"attribute_class"	"cannot_pick_up_intelligence"
-					"value"				"1"
 				}
 			}
 			"visuals"
