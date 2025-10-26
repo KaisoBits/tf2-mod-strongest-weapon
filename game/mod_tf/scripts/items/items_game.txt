@@ -30625,11 +30625,6 @@
 					"attribute_class"	"override_projectile_type"
 					"value"				"14"
 				}
-				"max pipebombs decreased"
-				{
-					"attribute_class"	"add_max_pipebombs"
-					"value" "-6"
-				}
 				"cannot pick up intelligence"
 				{
 					"attribute_class"	"cannot_pick_up_intelligence"
