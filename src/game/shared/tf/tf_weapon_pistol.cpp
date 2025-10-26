@@ -93,6 +93,8 @@ void CTFPistol_ScoutPrimary::PlayWeaponShootSound( void )
 //-----------------------------------------------------------------------------
 void CTFPistol_ScoutPrimary::SecondaryAttack( void )
 {
+	return; // No shove
+	
 	CTFPlayer *pOwner = ToTFPlayer( GetPlayerOwner() );
 	if ( !pOwner )
 		return;
