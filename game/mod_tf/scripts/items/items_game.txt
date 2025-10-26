@@ -29233,7 +29233,7 @@
 				"jarate duration"
 				{
 					"attribute_class" "jarate_duration"
-					"value" "5"
+					"value" "8"
 				}
 				"crit mod disabled"
 				{
@@ -221472,7 +221472,7 @@
 		{
 			"name"	"jarate duration"
 			"attribute_class"	"jarate_duration"
-			"description_string"	"#Attrib_JarateDuration"
+			"description_string"	"#Attrib_JarateDuration2"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"positive"
