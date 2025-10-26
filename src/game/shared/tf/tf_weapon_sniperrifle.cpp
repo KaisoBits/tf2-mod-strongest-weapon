@@ -545,7 +545,7 @@ void CTFSniperRifle::ZoomIn( void )
 
 
 //-----------------------------------------------------------------------------
-bool CTFSniperRifle::IsZoomed( void )
+bool CTFSniperRifle::IsZoomed( void ) const
 {
 	CTFPlayer *pPlayer = GetTFPlayerOwner();
 
@@ -1075,11 +1075,14 @@ void CTFSniperRifle::OnControlStunned( void )
 //-----------------------------------------------------------------------------
 int CTFSniperRifle::GetCustomDamageType() const
 {
-	if ( IsJarateRifle() )
+	CTFPlayer* pPlayer = ToTFPlayer(GetOwner());
+	if ( pPlayer )
 	{
-		return TF_DMG_CUSTOM_PENETRATE_NONBURNING_TEAMMATE;
+		if ( IsJarateRifle() && IsZoomed() )
+		{
+			return TF_DMG_CUSTOM_PENETRATE_NONBURNING_TEAMMATE;
+		}
 	}
-
 	return TF_DMG_CUSTOM_PENETRATE_MY_TEAM;
 }
 

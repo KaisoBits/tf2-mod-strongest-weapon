@@ -10669,51 +10669,37 @@ int CTFPlayer::OnTakeDamage_Alive( const CTakeDamageInfo &info )
 		if ( pSniper && ( pSniper->IsZoomed() || ( pSniper->GetWeaponID() == TF_WEAPON_SNIPERRIFLE_CLASSIC ) ) )
 		{
 			float flJarateTime = pSniper->GetJarateTime();
-			if ( flJarateTime >= 1.f )
+			if (flJarateTime && !m_Shared.IsInvulnerable() && !m_Shared.InCond(TF_COND_PHASE) && !m_Shared.InCond(TF_COND_PASSTIME_INTERCEPTION))
 			{
-				if ( !m_Shared.IsInvulnerable() && !m_Shared.InCond( TF_COND_PHASE ) && !m_Shared.InCond( TF_COND_PASSTIME_INTERCEPTION ) )
+				Vector vecOrigin = info.GetDamagePosition();
+				CPVSFilter filter(vecOrigin);
+				TE_TFParticleEffect(filter, 0.0, "peejar_impact_small", vecOrigin, vec3_angle);
+				m_Shared.AddCond(TF_COND_URINE, flJarateTime);
+
+				if (pTFAttacker)
 				{
-					Vector vecOrigin = info.GetDamagePosition();
-					CPVSFilter filter( vecOrigin );
-					TE_TFParticleEffect( filter, 0.0, "peejar_impact_small", vecOrigin, vec3_angle );
-					m_Shared.AddCond( TF_COND_URINE, flJarateTime );
+					UTIL_LogPrintf("\"%s<%i><%s><%s>\" triggered \"%s\" against \"%s<%i><%s><%s>\" with \"%s\" (attacker_position \"%d %d %d\") (victim_position \"%d %d %d\")\n",
+						pTFAttacker->GetPlayerName(),
+						pTFAttacker->GetUserID(),
+						pTFAttacker->GetNetworkIDString(),
+						pTFAttacker->GetTeam()->GetName(),
+						"jarate_attack",
+						GetPlayerName(),
+						GetUserID(),
+						GetNetworkIDString(),
+						GetTeam()->GetName(),
+						"sniperrifle",
+						(int)pTFAttacker->GetAbsOrigin().x,
+						(int)pTFAttacker->GetAbsOrigin().y,
+						(int)pTFAttacker->GetAbsOrigin().z,
+						(int)GetAbsOrigin().x,
+						(int)GetAbsOrigin().y,
+						(int)GetAbsOrigin().z);
 
-					if ( pTFAttacker )
+					// explosive jarate shot for a fully charged shot or headshot
+					if (pSniper->IsFullyCharged() || IsHeadshot(info.GetDamageCustom()) || LastHitGroup() == HITGROUP_HEAD)
 					{
-						UTIL_LogPrintf( "\"%s<%i><%s><%s>\" triggered \"%s\" against \"%s<%i><%s><%s>\" with \"%s\" (attacker_position \"%d %d %d\") (victim_position \"%d %d %d\")\n",    
-							pTFAttacker->GetPlayerName(),
-							pTFAttacker->GetUserID(),
-							pTFAttacker->GetNetworkIDString(),
-							pTFAttacker->GetTeam()->GetName(),
-							"jarate_attack",
-							GetPlayerName(),
-							GetUserID(),
-							GetNetworkIDString(),
-							GetTeam()->GetName(),
-							"sniperrifle",
-							(int)pTFAttacker->GetAbsOrigin().x, 
-							(int)pTFAttacker->GetAbsOrigin().y,
-							(int)pTFAttacker->GetAbsOrigin().z,
-							(int)GetAbsOrigin().x, 
-							(int)GetAbsOrigin().y,
-							(int)GetAbsOrigin().z );
-
-						if ( IsHeadshot( info.GetDamageCustom() ) || LastHitGroup() == HITGROUP_HEAD )
-						{
-							auto pWeaponBaseSecondary = dynamic_cast< CTFWeaponBase* >( pTFAttacker->GetEntityForLoadoutSlot( LOADOUT_POSITION_SECONDARY ) );
-							if ( pWeaponBaseSecondary && pWeaponBaseSecondary->HasEffectBarRegeneration() )
-							{
-								float flProgress = pWeaponBaseSecondary->GetEffectBarProgress();
-								if ( flProgress < 1.f )
-								{
-									pWeaponBaseSecondary->DecrementBarRegenTime( 1.f );
-								}
-							}
-
-// 							// Do an AE when it's a headshot
-// 							JarExplode( entindex(), pTFAttacker, pTFWeapon, pTFWeapon, info.GetDamagePosition(), pTFAttacker->GetTeamNumber(), tf_space_thrust_scout.GetFloat(), TF_COND_URINE, flJarateTime, "peejar_impact", TF_WEAPON_PEEJAR_EXPLODE_SOUND );
-// 							NDebugOverlay::Sphere( info.GetDamagePosition(), tf_space_thrust_scout.GetFloat(), 255, 20, 20, true, 5.f );
-						}
+						JarExplode(entindex(), pTFAttacker, pTFWeapon, pTFWeapon, info.GetDamagePosition(), pTFAttacker->GetTeamNumber(), 100.f, TF_COND_URINE, flJarateTime, "peejar_impact", NULL);
 					}
 				}
 			}
