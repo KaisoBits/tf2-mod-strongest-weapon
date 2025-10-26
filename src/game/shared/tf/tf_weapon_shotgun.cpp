@@ -542,10 +542,10 @@ void CTFSodaPopper::SecondaryAttack()
 	if ( !pPlayer || pPlayer->m_Shared.IsHypeBuffed() )
 		return;
 
-	if ( pPlayer->m_Shared.GetScoutHypeMeter() >= 100.f )
-	{
-		pPlayer->m_Shared.AddCond( TF_COND_SODAPOPPER_HYPE );
-	}
+	//if ( pPlayer->m_Shared.GetScoutHypeMeter() >= 100.f )
+	//{
+	//	pPlayer->m_Shared.AddCond( TF_COND_SODAPOPPER_HYPE );
+	//}
 }
 
 //-----------------------------------------------------------------------------

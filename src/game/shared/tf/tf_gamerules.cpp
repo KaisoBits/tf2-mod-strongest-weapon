@@ -6104,7 +6104,9 @@ bool CTFGameRules::ApplyOnDamageModifyRules( CTakeDamageInfo &info, CBaseEntity 
 					eDamageBonusCond = pVictim->m_Shared.InCond( TF_COND_URINE ) ? TF_COND_URINE : TF_COND_MARKEDFORDEATH;
 				}
 			}
-			else if ( pTFAttacker && ( pTFAttacker->m_Shared.InCond( TF_COND_OFFENSEBUFF ) || pTFAttacker->m_Shared.InCond( TF_COND_NOHEALINGDAMAGEBUFF ) ) )
+			else if ( pTFAttacker && ( pTFAttacker->m_Shared.InCond( TF_COND_OFFENSEBUFF ) || 
+				pTFAttacker->m_Shared.InCond( TF_COND_NOHEALINGDAMAGEBUFF ) || 
+				pTFAttacker->m_Shared.InCond( TF_COND_SODAPOPPER_HYPE ) ) )
 			{
 				// Attackers buffed by the soldier do mini-crits.
 				bAllSeeCrit = true;

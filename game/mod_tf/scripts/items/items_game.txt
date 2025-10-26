@@ -20850,7 +20850,7 @@
 			"show_in_armory"	"1"
 			"item_type_name"	"#TF_Weapon_Scattergun"
 			"item_name"	"#TF_SodaPopper"
-			"item_description"	"#TF_SodaPopper_Desc"
+			"item_description"	"#TF_SodaPopper_Desc2"
 			"item_logname"	"soda_popper"
 			"item_iconname"	"soda_popper"
 			"item_slot"	"primary"
@@ -20896,10 +20896,10 @@
 					"attribute_class"	"set_scattergun_no_reload_single"
 					"value"	"1"
 				}
-				"hype on damage"
+				"crit mod disabled"
 				{
-					"attribute_class"	"hype_on_damage"
-					"value"	"1"
+					"attribute_class"	"mult_crit_chance"
+					"value"	"0"
 				}
 			}
 			"visuals"
@@ -226992,6 +226992,16 @@
 			"name"	"shield_no_respawn"
 			"attribute_class"	"shield_no_respawn"
 			"description_string"	"#Attrib_ShieldNoRespawn"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"neutral"
+			"stored_as_integer"	"0"
+		}
+		"894"
+		{
+			"name"	"hype on running DISPLAY ONLY"
+			"attribute_class"	"hype_on_running_display_only"
+			"description_string"	"#Attrib_HypeOnRunning"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"neutral"

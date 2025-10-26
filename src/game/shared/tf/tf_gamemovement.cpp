@@ -2712,21 +2712,21 @@ void CTFGameMovement::FullWalkMove()
 	// Make sure velocity is valid.
 	CheckVelocity();
 
-// #ifdef GAME_DLL
-// 	if ( m_pTFPlayer->IsPlayerClass( TF_CLASS_SCOUT ) )
-// 	{
-// 		CTFWeaponBase* pWeapon = m_pTFPlayer->GetActiveTFWeapon();
-// 		if ( pWeapon && pWeapon->GetWeaponID() == TF_WEAPON_SODA_POPPER )
-// 		{
-// 			float speed = VectorLength( mv->m_vecVelocity );
-// 			float fDist = speed*gpGlobals->frametime;
-// 			float fHype = m_pTFPlayer->m_Shared.GetScoutHypeMeter() + (fDist / tf_scout_hype_mod.GetFloat());
-// 			if ( fHype > 100.f )
-// 				fHype = 100.f;
-// 			m_pTFPlayer->m_Shared.SetScoutHypeMeter( fHype );
-// 		}
-// 	}
-// #endif
+ #ifdef GAME_DLL
+ 	if ( m_pTFPlayer->IsPlayerClass( TF_CLASS_SCOUT ) )
+ 	{
+ 		CTFWeaponBase* pWeapon = m_pTFPlayer->GetActiveTFWeapon();
+ 		if ( pWeapon && pWeapon->GetWeaponID() == TF_WEAPON_SODA_POPPER )
+ 		{
+ 			float speed = VectorLength( mv->m_vecVelocity );
+ 			float fDist = speed*gpGlobals->frametime;
+ 			float fHype = m_pTFPlayer->m_Shared.GetScoutHypeMeter() + (fDist / tf_scout_hype_mod.GetFloat());
+ 			if ( fHype > 100.f )
+ 				fHype = 100.f;
+ 			m_pTFPlayer->m_Shared.SetScoutHypeMeter( fHype );
+ 		}
+ 	}
+ #endif
 
 }
 

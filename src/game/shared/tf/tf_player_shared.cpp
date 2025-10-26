@@ -12725,13 +12725,13 @@ bool CTFPlayer::CanAirDash( void ) const
 	if ( !bScout )
 		return false;
 
-	if ( m_Shared.InCond( TF_COND_SODAPOPPER_HYPE ) )
-	{
-		if ( m_Shared.GetAirDash() < 5 )
-			return true;
-		else
- 			return false;
-	}
+	//if ( m_Shared.InCond( TF_COND_SODAPOPPER_HYPE ) )
+	//{
+	//	if ( m_Shared.GetAirDash() < 5 )
+	//		return true;
+	//	else
+ //			return false;
+	//}
 
 	
 	CTFWeaponBase *pMeeleWeapon = (CTFWeaponBase*)GetWeapon(2);
@@ -14004,17 +14004,17 @@ void CTFPlayerShared::SetScoutHypeMeter( float val )
 		return;
 
 	m_flHypeMeter = Clamp(val, 0.0f, 100.0f);
-	//if ( m_flHypeMeter >= 100.f )
-	//{
-	//	if ( m_pOuter->IsPlayerClass( TF_CLASS_SCOUT ) )
-	//	{
-	//		CTFWeaponBase* pWeapon = m_pOuter->GetActiveTFWeapon();
-	//		if ( pWeapon && pWeapon->GetWeaponID() == TF_WEAPON_SODA_POPPER )
-	//		{
-	//			AddCond( TF_COND_CRITBOOSTED_HYPE );
-	//		}
-	//	}
-	//}
+	if ( m_flHypeMeter >= 100.f )
+	{
+		if ( m_pOuter->IsPlayerClass( TF_CLASS_SCOUT ) )
+		{
+			CTFWeaponBase* pWeapon = m_pOuter->GetActiveTFWeapon();
+			if ( pWeapon && pWeapon->GetWeaponID() == TF_WEAPON_SODA_POPPER )
+			{
+				AddCond( TF_COND_SODAPOPPER_HYPE );
+			}
+		}
+	}
 }
 
 //-----------------------------------------------------------------------------
