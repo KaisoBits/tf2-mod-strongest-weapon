@@ -45111,6 +45111,11 @@
 					"attribute_class"	"freeze_backstab_victim"
 					"value" "1"
 				}
+				"silent killer"
+				{
+					"attribute_class"	"set_silent_killer"
+					"value" "1"
+				}
 				"melts in fire"
 				{
 					"attribute_class"	"melts_in_fire"
@@ -45119,7 +45124,7 @@
 				"become fireproof on hit by fire"
 				{
 					"attribute_class"	"become_fireproof_on_hit_by_fire"
-					"value" "10"
+					"value" "3"
 				}
 				"set icicle knife mode"
 				{
@@ -223243,7 +223248,7 @@
 		{
 			"name"	"melts in fire"
 			"attribute_class"	"melts_in_fire"
-			"description_string"	"#Attrib_MeltsInFire"
+			"description_string"	"#Attrib_MeltsInFire2"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"negative"
@@ -223263,7 +223268,7 @@
 		{
 			"name"	"become fireproof on hit by fire"
 			"attribute_class"	"become_fireproof_on_hit_by_fire"
-			"description_string"	"#Attrib_BecomeFireproofOnHitByFire"
+			"description_string"	"#Attrib_BecomeFireproofOnHitByFire2"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"positive"

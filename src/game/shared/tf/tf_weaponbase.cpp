@@ -5433,15 +5433,13 @@ void CTFWeaponBase::ApplyOnInjuredAttributes( CTFPlayer *pVictim, CTFPlayer *pAt
 		CALL_ATTRIB_HOOK_INT( iBecomeFireproofOnHitByFire, become_fireproof_on_hit_by_fire );
 		if ( iBecomeFireproofOnHitByFire > 0 && ( ( info.GetDamageType() & DMG_BURN ) || ( info.GetDamageType() & DMG_IGNITE ) ) )
 		{
-			pVictim->m_Shared.AddCond( TF_COND_FIRE_IMMUNE, 1.f );
+			pVictim->m_Shared.AddCond( TF_COND_FIRE_IMMUNE, iBecomeFireproofOnHitByFire);
 
 			if ( pVictim->m_Shared.InCond( TF_COND_BURNING ) )
 			{
 				pVictim->EmitSound( "TFPlayer.FlameOut" );
 				pVictim->m_Shared.RemoveCond( TF_COND_BURNING );
 			}
-			// STAGING_SPY
-			pVictim->m_Shared.AddCond( TF_COND_AFTERBURN_IMMUNE, iBecomeFireproofOnHitByFire );
 		}
 	}
 }

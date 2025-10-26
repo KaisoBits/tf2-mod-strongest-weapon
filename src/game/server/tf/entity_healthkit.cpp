@@ -272,11 +272,6 @@ bool CHealthAmmoKit::MyTouch( CBasePlayer *pPlayer )
 					bAmmoSuccess = true;
 				}
 
-				if ( pTFPlayer->AddToSpyKnife( 100.0f * flPackRatio, false ) )
-				{
-					bAmmoSuccess = true;
-				}
-
 				if ( pTFPlayer->IsPlayerClass( TF_CLASS_ENGINEER ) )
 				{
 					int iMaxGrenades1 = pTFPlayer->GetMaxAmmo( TF_AMMO_GRENADES1 );

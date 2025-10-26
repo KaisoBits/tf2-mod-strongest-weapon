@@ -88,11 +88,6 @@ bool CAmmoPack::MyTouch( CBasePlayer *pPlayer )
 			bSuccess = true;
 		}
 
-		if ( pTFPlayer->AddToSpyKnife( 100.0f * flPackRatio, false ) )
-		{
-			bSuccess = true;
-		}
-
 		int iAmmoIsCharge = 0;
 		CALL_ATTRIB_HOOK_INT_ON_OTHER( pTFPlayer, iAmmoIsCharge, ammo_gives_charge );
 		if ( iAmmoIsCharge )

@@ -368,11 +368,6 @@ void CTFAmmoPack::PackTouch( CBaseEntity *pOther )
 		iAmmoTaken++;
 	}
 
-	if ( pPlayer->AddToSpyKnife( 100.0f * m_flAmmoRatio, false ) )
-	{
-		iAmmoTaken++;
-	}
-
 	// Add Charge if applicable
 	int iAmmoIsCharge = 0;
 	CALL_ATTRIB_HOOK_INT_ON_OTHER( pPlayer, iAmmoIsCharge, ammo_gives_charge );
