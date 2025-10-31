@@ -32453,7 +32453,7 @@
 			"show_in_armory"	"1"
 			"item_type_name"	"#TF_Weapon_StickBomb"
 			"item_name"	"#TF_UllapoolCaber"
-			"item_description"	"#TF_UllapoolCaber_Desc"
+			"item_description"	"#TF_UllapoolCaber_Desc2"
 			"item_logname"	"ullapool_caber"
 			"item_iconname"	"ullapool_caber"
 			"item_slot"	"melee"
@@ -32479,15 +32479,10 @@
 			"drop_sound"		"ui/item_metal_weapon_drop.wav"
 			"attributes"
 			{
-				"fire rate penalty"
+				"damage penalty"
 				{
-					"attribute_class"	"mult_postfiredelay"
-					"value"	"1.2"
-				}
-				"single wep deploy time increased"
-				{
-					"attribute_class"	"mult_single_wep_deploy_time"
-					"value"	"2.0"
+					"attribute_class"	"mult_dmg"
+					"value"	"0.55"
 				}
 				"crit mod disabled"
 				{
