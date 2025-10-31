@@ -20520,7 +20520,7 @@
 			}
 			"show_in_armory"	"1"
 			"item_type_name"	"#TF_Weapon_Peppergun"
-			"item_description"	"#TF_TheShortstop_Desc"
+			"item_description"	"#TF_TheShortstop_Desc2"
 			"item_name"	"#TF_TheShortstop"
 			"item_slot"	"primary"
 			"anim_slot"	"secondary"
