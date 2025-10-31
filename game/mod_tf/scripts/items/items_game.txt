@@ -16927,10 +16927,6 @@
 					"attribute_class"	"mod_charge_time"
 					"value" "0.5"
 				}
-				{
-					"attribute_class"	"provide_on_active"
-					"value" "1"
-				}
 				"max health additive penalty"
 				{
 					"attribute_class"	"add_maxhealth"
@@ -58104,7 +58100,7 @@
 			"show_in_armory"	"1"
 			"item_type_name" 	"#TF_Wearable_Shield"
 			"item_name"		"#TF_TideTurner"
-			"item_description"	"#TF_TideTurner_Desc"
+			"item_description"	"#TF_Unique_Achievement_Shield_Desc"
 			"item_slot"		"secondary"
 			"equip_region"	"arms"
 			"anim_slot"		"FORCE_NOT_USED"
@@ -58132,17 +58128,12 @@
 				"dmg taken from fire reduced"
 				{
 					"attribute_class"	"mult_dmgtaken_from_fire"
-					"value"			"0.85"
+					"value"			"0.75"
 				}
 				"dmg taken from blast reduced"
 				{
 					"attribute_class"	"mult_dmgtaken_from_explosions"
-					"value"			"0.85"
-				}
-				"lose demo charge on damage when charging"
-				{
-					"attribute_class"	"lose_demo_charge_on_damage_when_charging"
-					"value"				"1"
+					"value"			"0.75"
 				}
 				"allowed in medieval mode"
 				{
@@ -58157,7 +58148,7 @@
 				"kill refills meter"
 				{
 					"attribute_class"	"kill_refills_meter"
-					"value"			"0.75"
+					"value"			"1"
 				}
 			}
 			"mouse_pressed_sound"	"ui/item_wood_pole_pickup.wav"
