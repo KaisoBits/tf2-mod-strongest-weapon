@@ -27068,7 +27068,6 @@
 			"show_in_armory"	"1"
 			"item_type_name"	"#TF_Weapon_Bonesaw"
 			"item_name"	"#TF_Unique_BattleSaw"
-			"item_description" "#TF_Unique_BattleSaw_Desc"
 			"item_slot"	"melee"
 			"image_inventory"	"backpack/workshop/weapons/c_models/c_uberneedle/c_uberneedle"
 			"image_inventory_size_w"		"128"
@@ -27093,7 +27092,7 @@
 				"ubercharge_preserved_on_spawn_max"
 				{
 					"attribute_class"	"ubercharge_preserved_on_spawn_max"
-					"value" "0.6"
+					"value" "0.2"
 				}
 				"max health additive penalty"
 				{
@@ -226286,7 +226285,7 @@
 		{
 			"name"	"ubercharge_preserved_on_spawn_max"
 			"attribute_class"	"ubercharge_preserved_on_spawn_max"
-			"description_string"	"#Attrib_UberchargeSavedOnHit"
+			"description_string"	"#Attrib_UberchargeSavedOnHit2"
 			"description_format"	"value_is_additive_percentage"
 			"hidden"	"0"
 			"effect_type"	"positive"
