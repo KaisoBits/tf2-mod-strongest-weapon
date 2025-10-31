@@ -21442,7 +21442,7 @@
 			"show_in_armory"	"1"
 			"item_type_name"	"#TF_Weapon_Laser_Pointer"
 			"item_name"	"#TF_Unique_Achievement_Laser_Pointer"
-			"item_description"	"#TF_Wrangler_Desc"
+			"item_description"	"#TF_Wrangler_Desc2"
 			"inspect_panel_dist" "40"
 			"item_slot"	"secondary"
 			"anim_slot"	"item1"
