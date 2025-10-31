@@ -27015,12 +27015,12 @@
 				"bleeding duration"
 				{
 					"attribute_class"	"bleeding_duration"
-					"value" "6"
+					"value" "8"
 				}
 				"damage penalty"
 				{
 					"attribute_class"	"mult_dmg"
-					"value"	"0.5"
+					"value"	"0.65"
 				}
 			}
 			"mouse_pressed_sound"	"ui/item_knife_small_pickup.wav"
