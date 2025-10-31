@@ -1520,8 +1520,7 @@ bool CHudItemEffectMeter_Rune::ShouldDraw( void )
 template <>
 bool CHudItemEffectMeter_Weapon< CTFBonesaw >::IsEnabled( void )
 {
-	if ( !m_pPlayer )
-		return false;
+	return false; // disabled
 
 	float flPreserveUber = 0.f;
 	CALL_ATTRIB_HOOK_FLOAT_ON_OTHER( m_pPlayer, flPreserveUber, ubercharge_preserved_on_spawn_max );

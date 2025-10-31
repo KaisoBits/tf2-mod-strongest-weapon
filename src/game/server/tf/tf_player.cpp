@@ -2111,14 +2111,14 @@ void CTFPlayer::UpdateTimers( void )
 //-----------------------------------------------------------------------------
 void CTFPlayer::PostSpawnThink( void )
 {
-	if ( IsPlayerClass( TF_CLASS_MEDIC ) )
-	{
-		CWeaponMedigun *pMedigun = dynamic_cast<CWeaponMedigun*>( Weapon_OwnsThisID( TF_WEAPON_MEDIGUN ) );
-		if ( pMedigun )
-		{
-				pMedigun->SetChargeLevelToPreserve( 0.f );
-		}
-	}
+	//if ( IsPlayerClass( TF_CLASS_MEDIC ) )
+	//{
+	//	CWeaponMedigun *pMedigun = dynamic_cast<CWeaponMedigun*>( Weapon_OwnsThisID( TF_WEAPON_MEDIGUN ) );
+	//	if ( pMedigun )
+	//	{
+	//			pMedigun->SetChargeLevelToPreserve( 0.f );
+	//	}
+	//}
 }
 
 //-----------------------------------------------------------------------------

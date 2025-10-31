@@ -97,19 +97,6 @@ void CTFBonesaw::DoMeleeDamage( CBaseEntity* ent, trace_t& trace )
 					pTFOwner->m_Shared.SetDecapitations( iDecaps );
 					pTFOwner->TeamFortress_SetSpeed();
 				}
-
-				float flPreserveUber = 0.f;
-				CALL_ATTRIB_HOOK_FLOAT( flPreserveUber, ubercharge_preserved_on_spawn_max );
-				if ( flPreserveUber )
-				{
-					pTFOwner->m_Shared.SetDecapitations( iDecaps );
-
-					CWeaponMedigun *pMedigun = dynamic_cast< CWeaponMedigun* >( pTFOwner->Weapon_OwnsThisID( TF_WEAPON_MEDIGUN ) );
-					if ( pMedigun )
-					{
-						pMedigun->SetChargeLevelToPreserve( ( iDecaps * VITASAW_CHARGE_PER_HIT ) );
-					}
-				}
 			}
 		}
 	}
@@ -154,12 +141,6 @@ void CTFBonesaw::OnPlayerKill( CTFPlayer *pVictim, const CTakeDamageInfo &info )
 	{
 		int nOrgans = pTFOwner->m_Shared.GetDecapitations() + 1;
 		pTFOwner->m_Shared.SetDecapitations( nOrgans );
-
-		CWeaponMedigun *pMedigun = dynamic_cast< CWeaponMedigun* >( pTFOwner->Weapon_OwnsThisID( TF_WEAPON_MEDIGUN ) );
-		if ( pMedigun )
-		{
-			pMedigun->SetChargeLevelToPreserve( ( nOrgans * VITASAW_CHARGE_PER_HIT ) );
-		}
 	}
 }
 #endif

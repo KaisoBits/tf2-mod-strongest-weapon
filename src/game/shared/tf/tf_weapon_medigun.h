@@ -129,7 +129,6 @@ public:
 #endif
 
 	void			SetChargeLevel( float flChargeLevel ) { m_flChargeLevel = flChargeLevel; }
-	void			SetChargeLevelToPreserve( float flAmount );
 	float			GetChargeLevel( void ) const { return m_flChargeLevel; }
 	float			GetMinChargeAmount( void ) const;
 
@@ -208,7 +207,6 @@ protected:
 	int						m_nHealTargetClass;
 	int						m_nChargesReleased;
 #endif
-	float					m_flChargeLevelToPreserve;
 	float					m_flOverHealExpert;		// Upgrade
 
 	CHandle< CTFMedigunShield > m_hMedigunShield;

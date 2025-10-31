@@ -290,8 +290,9 @@ void CWeaponMedigun::WeaponReset( void )
 
 	if ( TFGameRules()->State_Get() == GR_STATE_RND_RUNNING )
 	{
-		// This is determined via an attribute in SetStoredChargeLevel()
-		m_flChargeLevel = Min( (float)m_flChargeLevel, m_flChargeLevelToPreserve );
+		float flPreserveUber = 0;
+		CALL_ATTRIB_HOOK_FLOAT_ON_OTHER(pOwner, flPreserveUber, ubercharge_preserved_on_spawn_max);
+		m_flChargeLevel = Min( (float)m_flChargeLevel, flPreserveUber);
 	}
 	else
 	{
@@ -767,18 +768,6 @@ int CWeaponMedigun::GetMedigunType( void ) const
 	int iMode = 0;
 	CALL_ATTRIB_HOOK_INT( iMode, set_weapon_mode );
 	return iMode;
-}
-
-//-----------------------------------------------------------------------------
-// Purpose: 
-//-----------------------------------------------------------------------------
-void CWeaponMedigun::SetChargeLevelToPreserve( float flAmount )
-{
-	CTFPlayer *pOwner = ToTFPlayer( GetOwnerEntity() );
-
-	float flPreserveUber = 0.f;
-	CALL_ATTRIB_HOOK_FLOAT_ON_OTHER( pOwner, flPreserveUber, ubercharge_preserved_on_spawn_max );
-	m_flChargeLevelToPreserve = Min( flAmount, flPreserveUber );
 }
 
 //-----------------------------------------------------------------------------
