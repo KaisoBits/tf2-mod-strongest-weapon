@@ -21170,7 +21170,7 @@
 				"minigun spinup time decreased"
 				{
 					"attribute_class"	"mult_minigun_spinup_time"
-					"value" "0.8"
+					"value" "0.25"
 				}
 				"minigun no spin sounds"
 				{
@@ -21181,11 +21181,6 @@
 				{
 					"attribute_class"	"mult_postfiredelay"
 					"value"	"1.2"
-				}
-				"weapon spread bonus"
-				{
-					"attribute_class"	"mult_spread_scale"
-					"value"	"0.8"
 				}
 			}
 		}
