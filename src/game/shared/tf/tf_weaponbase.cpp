@@ -5048,6 +5048,13 @@ void CTFWeaponBase::ApplyOnHitAttributes( CBaseEntity *pVictimBaseEntity, CTFPla
 		iModHealthOnHit = Max( 3, (int)( (float)iModHealthOnHit * flScale ) );
 	}
 
+	int iModHealOnHitNoScale = 0;
+	CALL_ATTRIB_HOOK_INT(iModHealOnHitNoScale, add_onhit_addhealth_no_scale);
+	if (iModHealOnHitNoScale)
+	{
+		iModHealthOnHit += iModHealOnHitNoScale;
+	}
+
 	// Charge meter on hit
 	float flChargeRefill = 0.0f;
 	CALL_ATTRIB_HOOK_FLOAT( flChargeRefill, charge_meter_on_hit );
