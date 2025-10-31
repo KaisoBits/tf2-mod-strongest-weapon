@@ -16927,7 +16927,6 @@
 					"attribute_class"	"mod_charge_time"
 					"value" "0.5"
 				}
-				"provide on active"
 				{
 					"attribute_class"	"provide_on_active"
 					"value" "1"
