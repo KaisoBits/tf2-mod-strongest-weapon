@@ -4165,14 +4165,58 @@ void CTFPlayer::InitClass( void )
 
 }
 
+ConVar le_disable_text_chat( "le_disable_text_chat", "1", FCVAR_NOTIFY,
+	"If 1, all players are blocked from using say/say_team unless their SteamID64 appears in mod_chat_whitelist_steamids (space-separated)." );
+ConVar le_chat_whitelist_steamids( "le_chat_whitelist_steamids", "", FCVAR_NOTIFY,
+	"Space-separated list of SteamID64s that bypass mod_disable_text_chat." );
+
+static bool Mod_IsSteamIDChatWhitelisted( CSteamID steamID )
+{
+	if ( !steamID.IsValid() )
+		return false;
+
+	const char *pszWhitelist = le_chat_whitelist_steamids.GetString();
+	if ( !pszWhitelist || !*pszWhitelist )
+		return false;
+
+	char szTarget[32];
+	V_snprintf( szTarget, sizeof(szTarget), "%llu", steamID.ConvertToUint64() );
+
+	const char *p = pszWhitelist;
+	while ( *p )
+	{
+		while ( *p == ' ' || *p == ',' || *p == '\t' )
+			++p;
+		if ( !*p )
+			break;
+
+		const char *start = p;
+		while ( *p && *p != ' ' && *p != ',' && *p != '\t' )
+			++p;
+
+		const size_t nLen = p - start;
+		if ( nLen == V_strlen( szTarget ) && V_strncmp( start, szTarget, nLen ) == 0 )
+			return true;
+	}
+
+	return false;
+}
+
 //-----------------------------------------------------------------------------
 // Purpose: Check if a player can use chat commands at the moment
 //-----------------------------------------------------------------------------
 bool CTFPlayer::CanPlayerTalk()
 {
-	// If this player is known to the match, and joined as chat-suspended, they can not. 
+	// If this player is known to the match, and joined as chat-suspended, they can not.
 	if ( BHaveChatSuspensionInCurrentMatch() )
 		return false;
+
+	if ( le_disable_text_chat.GetBool() )
+	{
+		CSteamID steamID;
+		if ( !GetSteamID( &steamID ) || !Mod_IsSteamIDChatWhitelisted( steamID ) )
+			return false;
+	}
 
 	return BaseClass::CanPlayerTalk();
 }
@@ -7069,7 +7113,7 @@ void CTFPlayer::CheckInstantLoadoutRespawn( void )
 	// In a respawn room of your own team
 	if ( !PointInRespawnRoom( this, WorldSpaceCenter(), true ) )
 		return;
-	
+
 	// Not in stalemate (beyond the change class period)
 	if ( TFGameRules()->InStalemate() && !TFGameRules()->CanChangeClassInStalemate() )
 		return;
@@ -7079,7 +7123,7 @@ void CTFPlayer::CheckInstantLoadoutRespawn( void )
 		return;
 
 	// Not if we're on the losing team
-	if ( TFGameRules()->State_Get() == GR_STATE_TEAM_WIN && TFGameRules()->GetWinningTeam() != GetTeamNumber() ) 
+	if ( TFGameRules()->State_Get() == GR_STATE_TEAM_WIN && TFGameRules()->GetWinningTeam() != GetTeamNumber() )
 		return;
 
 	// Not if our current class's loadout hasn't changed
