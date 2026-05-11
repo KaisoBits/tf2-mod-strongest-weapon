@@ -8097,6 +8097,15 @@ bool CTFPlayer::ClientCommand( const CCommand &args )
 		}
 		return true;
 	}
+	else if (FStrEq("respawn_postloadoutchange", pcmd))
+	{
+		// Direct replacement for k_EMsgGCRespawnPostLoadoutChange (which is a no-op under
+		// DISABLE_GC_CONNECTION). CheckInstantLoadoutRespawn still gates on the SOC-driven
+		// m_bLoadoutChanged tracking — if the webapi fetch hasn't applied yet, the respawn
+		// is skipped and the regen zone (resupply cabinet) picks up the new loadout instead.
+		CheckInstantLoadoutRespawn();
+		return true;
+	}
 
 	return BaseClass::ClientCommand( args );
 }

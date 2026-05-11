@@ -2000,12 +2000,10 @@ CON_COMMAND( load_itempreset, "Equip all items for a given preset on the player.
 	equipped_preset_t unPreset = atoi( args[1] );
 	if ( TFInventoryManager()->LoadPreset( unClass, unPreset ) )
 	{
-		// Tell the GC to tell server that we should respawn if we're in a respawn room
 		extern ConVar tf_respawn_on_loadoutchanges;
 		if ( tf_respawn_on_loadoutchanges.GetBool() )
 		{
-			GCSDK::CGCMsg< ::MsgGCEmpty_t > msg( k_EMsgGCRespawnPostLoadoutChange );
-			GCClientSystem()->BSendMessage( msg );
+			engine->ClientCmd_Unrestricted( "respawn_postloadoutchange\n" );
 		}
 	}
 }
