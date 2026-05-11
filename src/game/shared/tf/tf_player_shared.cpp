@@ -10901,7 +10901,7 @@ float CTFPlayer::TeamFortress_CalculateMaxSpeed( bool bIgnoreSpecialAbility /*= 
 		if ( pWeapon )
 		{
 			CWeaponMedigun *pMedigun = dynamic_cast< CWeaponMedigun* >( pWeapon );
-			if ( pMedigun && pMedigun->GetMedigunType() == MEDIGUN_QUICKFIX )
+			if ( pMedigun && pMedigun->GetMedigunType() != MEDIGUN_STANDARD )
 			{
 				// Medics match faster classes when healing them
 				CTFPlayer *pHealTarget = ToTFPlayer( pMedigun->GetHealTarget() );
@@ -10954,15 +10954,9 @@ float CTFPlayer::TeamFortress_CalculateMaxSpeed( bool bIgnoreSpecialAbility /*= 
 	// If we're a heavy with berzerker mode...
 	if ( playerclass == TF_CLASS_HEAVYWEAPONS )
 	{
-		float heavy_max_speed = default_speed * 1.35f;
 		if ( m_Shared.InCond( TF_COND_ENERGY_BUFF ) )
 		{
 			maxfbspeed *= 1.3f;
-			if ( maxfbspeed > heavy_max_speed )
-			{
-				// Prevent other speed modifiers like GRU from making berzerker mode too fast.
-				maxfbspeed = heavy_max_speed;
-			}
 		}
 	}
 
