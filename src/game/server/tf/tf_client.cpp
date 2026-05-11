@@ -90,11 +90,17 @@ ClientPutInServer
 called each time a player is spawned into the game
 ============
 */
+extern void Mod_FilterPlayerName( char *pszName, int nMaxLen );
+
 void ClientPutInServer( edict_t *pEdict, const char *playername )
 {
 	// Allocate a CBaseTFPlayer for pev, and call spawn
 	CTFPlayer *pPlayer = CTFPlayer::CreatePlayer( "player", pEdict );
-	pPlayer->SetPlayerName( playername );
+
+	char szFiltered[MAX_PLAYER_NAME_LENGTH];
+	Q_strncpy( szFiltered, playername, sizeof(szFiltered) );
+	Mod_FilterPlayerName( szFiltered, sizeof(szFiltered) );
+	pPlayer->SetPlayerName( szFiltered );
 }
 
 

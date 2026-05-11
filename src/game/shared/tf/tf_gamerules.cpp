@@ -10186,13 +10186,23 @@ VoiceCommandMenuItem_t *CTFGameRules::VoiceCommand( CBaseMultiplayerPlayer *pPla
 	return pItem;
 }
 
+// Username bad-word filter — definition lives in util_shared.cpp (so the same
+// regex runs both server-side at name set/change and client-side inside
+// UTIL_GetFilteredPlayerName for scoreboard/killfeed).
+extern void Mod_FilterPlayerName( char *pszName, int nMaxLen );
+
 //-----------------------------------------------------------------------------
-// Purpose: Actually change a player's name.  
+// Purpose: Actually change a player's name.
 //-----------------------------------------------------------------------------
 void CTFGameRules::ChangePlayerName( CTFPlayer *pPlayer, const char *pszNewName )
 {
 	if ( !tf_allow_player_name_change.GetBool() )
 		return;
+
+	char szFiltered[MAX_PLAYER_NAME_LENGTH];
+	Q_strncpy( szFiltered, pszNewName, sizeof(szFiltered) );
+	Mod_FilterPlayerName( szFiltered, sizeof(szFiltered) );
+	pszNewName = szFiltered;
 
 	const char *pszOldName = pPlayer->GetPlayerName();
 
