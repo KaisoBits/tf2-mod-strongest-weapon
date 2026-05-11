@@ -19,6 +19,9 @@
 
 using namespace CustomTextureSystem;
 
+ConVar le_disable_custom_decals( "le_disable_custom_decals", "1", FCVAR_ARCHIVE,
+	"If 1, ignore user-applied decals on items (sign, Conscientious Objector, Photo Badge / Frontline Field Recorder) and render the default texture." );
+
 ITexture *CustomTextureSystem::g_pPreviewCustomTexture = NULL;
 
 CEconItemView *CustomTextureSystem::g_pPreviewEconItem = NULL;
@@ -787,11 +790,13 @@ void CCustomTextureOnItemProxy::OnBindInternal( CEconItemView *pScriptItem )
 	// Fetch the UGC handle from the item
 	UGCHandle_t ugcHandle = pScriptItem->GetCustomUserTextureID();
 
+	const bool bDisableCustomDecals = le_disable_custom_decals.GetBool();
+
 	// Are we in a preview window?
 	if ( pScriptItem == g_pPreviewEconItem ) // !KLUDGE!
 	{
 		Assert( g_pPreviewCustomTexture );
-		if ( g_pPreviewCustomTexture )
+		if ( g_pPreviewCustomTexture && !bDisableCustomDecals )
 		{
 			texture = g_pPreviewCustomTexture;
 
@@ -803,7 +808,7 @@ void CCustomTextureOnItemProxy::OnBindInternal( CEconItemView *pScriptItem )
 			}
 		}
 	}
-	else if (ugcHandle != 0)
+	else if (ugcHandle != 0 && !bDisableCustomDecals)
 	{
 
 		SCustomImageCacheEntry *pEntry = CustomTextureCache_FindOrAddByCloudId(ugcHandle);
