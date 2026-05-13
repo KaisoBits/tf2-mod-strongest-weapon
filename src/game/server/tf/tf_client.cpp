@@ -271,3 +271,95 @@ void InstallGameRules()
 {
 	CreateGameRulesObject( "CTFGameRules" );
 }
+
+CON_COMMAND_F( kick_id, "Kick a player by entity index or userid. Usage: kick_id <id> [reason]. No args prints the player list.", FCVAR_GAMEDLL )
+{
+	if ( !UTIL_IsCommandIssuedByServerAdmin() )
+		return;
+
+	auto PrintPlayerList = []()
+	{
+		Msg( "%-4s %-8s %-32s %s\n", "#", "userid", "name", "steamid" );
+		for ( int i = 1; i <= gpGlobals->maxClients; ++i )
+		{
+			CBasePlayer *pPlayer = UTIL_PlayerByIndex( i );
+			if ( !pPlayer || !pPlayer->IsConnected() )
+				continue;
+
+			const char *pszSteamID = pPlayer->GetNetworkIDString();
+			Msg( "%-4d %-8d %-32s %s%s\n",
+				pPlayer->entindex(),
+				pPlayer->GetUserID(),
+				pPlayer->GetPlayerName(),
+				pszSteamID ? pszSteamID : "",
+				pPlayer->IsFakeClient() ? " (bot)" : "" );
+		}
+	};
+
+	if ( args.ArgC() < 2 )
+	{
+		Msg( "Usage: kick_id <id> [reason]\n" );
+		Msg( "<id> may be either an entity index (#) or a userid.\n\n" );
+		PrintPlayerList();
+		return;
+	}
+
+	const char *pszId = args[1];
+	const int nId = atoi( pszId );
+	if ( nId <= 0 )
+	{
+		Msg( "kick_id: '%s' is not a valid id.\n", pszId );
+		PrintPlayerList();
+		return;
+	}
+
+	CBasePlayer *pTarget = NULL;
+	if ( nId >= 1 && nId <= gpGlobals->maxClients )
+	{
+		CBasePlayer *pCandidate = UTIL_PlayerByIndex( nId );
+		if ( pCandidate && pCandidate->IsConnected() )
+			pTarget = pCandidate;
+	}
+	if ( !pTarget )
+	{
+		for ( int i = 1; i <= gpGlobals->maxClients; ++i )
+		{
+			CBasePlayer *pCandidate = UTIL_PlayerByIndex( i );
+			if ( pCandidate && pCandidate->IsConnected() && pCandidate->GetUserID() == nId )
+			{
+				pTarget = pCandidate;
+				break;
+			}
+		}
+	}
+
+	if ( !pTarget )
+	{
+		Msg( "kick_id: no connected player with entity index or userid %d.\n", nId );
+		PrintPlayerList();
+		return;
+	}
+
+	char szReason[256] = { 0 };
+	for ( int i = 2; i < args.ArgC(); ++i )
+	{
+		if ( i > 2 )
+			Q_strncat( szReason, " ", sizeof(szReason), COPY_ALL_CHARACTERS );
+		Q_strncat( szReason, args[i], sizeof(szReason), COPY_ALL_CHARACTERS );
+	}
+
+	const int nUserID = pTarget->GetUserID();
+	const char *pszName = pTarget->GetPlayerName();
+	if ( szReason[0] )
+	{
+		Msg( "kick_id: kicking #%d userid %d \"%s\" (%s)\n",
+			pTarget->entindex(), nUserID, pszName, szReason );
+		engine->ServerCommand( UTIL_VarArgs( "kickid %d %s\n", nUserID, szReason ) );
+	}
+	else
+	{
+		Msg( "kick_id: kicking #%d userid %d \"%s\"\n",
+			pTarget->entindex(), nUserID, pszName );
+		engine->ServerCommand( UTIL_VarArgs( "kickid %d\n", nUserID ) );
+	}
+}
