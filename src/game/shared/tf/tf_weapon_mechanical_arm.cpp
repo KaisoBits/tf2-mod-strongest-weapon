@@ -289,45 +289,6 @@ void CTFMechanicalArm::SecondaryAttack(void)
 	if (ShockAttack())
 	{
 		WeaponSound(SPECIAL3);
-#ifdef GAME_DLL
-		Vector vecForward, vecRight, vecUp;
-		AngleVectors( pOwner->EyeAngles(), &vecForward, &vecRight, &vecUp );
-
-		float fRight = 15.f;
-		if ( IsViewModelFlipped() )
-		{
-			fRight *= -1;
-		}
-// 		Vector vecSrc = pOwner->Weapon_ShootPosition();
-// 		vecSrc = vecSrc + ( vecUp * -9.0f ) + ( vecRight * 7.0f ) + ( vecForward * 3.0f );
-		Vector vecSrc = pOwner->EyePosition() + ( vecForward * 40.f ) + ( vecRight * fRight ) + ( vecUp * -10.f );
-
-		QAngle angForward = pOwner->EyeAngles();
-
-		trace_t trace;
-		Vector vecEye = pOwner->EyePosition();
-		CTraceFilterSimple traceFilter( this, COLLISION_GROUP_PROJECTILE );
-		UTIL_TraceHull( vecEye, vecSrc, -Vector( 8.f, 8.f, 8.f ), Vector( 8.f, 8.f, 8.f ), MASK_SOLID_BRUSHONLY, &traceFilter, &trace );
-		if ( !trace.DidHit() )
-		{
-			CTFProjectile_MechanicalArmOrb *pOrb = static_cast< CTFProjectile_MechanicalArmOrb* >( CBaseEntity::CreateNoSpawn( "tf_projectile_mechanicalarmorb", vecSrc, angForward, pOwner ) );
-			if ( pOrb )
-			{
-				pOrb->SetOwnerEntity( pOwner );
-				pOrb->SetLauncher( this );
-
-				Vector vForward;
-				AngleVectors( angForward, &vForward, NULL, NULL );
-
-				pOrb->SetAbsVelocity( vForward * tf_mecharm_orb_speed );
-
-				pOrb->ChangeTeam( pOwner->GetTeamNumber() );
-				pOrb->SetCritical( false );
-
-				DispatchSpawn( pOrb );
-			}
-		}
-#endif // GAME_DLL
 	}
 	else
 	{
