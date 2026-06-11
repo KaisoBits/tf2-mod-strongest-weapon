@@ -30569,7 +30569,7 @@
 			"show_in_armory"	"1"
 			"item_type_name"	"#Tf_Weapon_Pipebomblauncher"
 			"item_name"	"#TF_Weapon_StickyBomb_Jump"
-			"item_description"	"#TF_Weapon_StickyBomb_Jump_Desc"
+			"item_description"	"#TF_Weapon_StickyBomb_Jump_Desc2"
 			"item_slot"	"secondary"
 			"anim_slot"	"primary"
 			"item_quality"	"unique"
