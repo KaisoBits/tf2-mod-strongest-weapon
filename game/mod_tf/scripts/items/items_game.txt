@@ -19330,6 +19330,7 @@
 			"craft_material_type"	"weapon"
 			"item_type_name"	"#TF_Weapon_Medigun"
 			"item_name"	"#TF_Weapon_Medigun"
+			"item_description" "#TF_Weapon_Medigun_desc"
 			"item_slot"	"secondary"
 			"equip_region"	"medigun_backpack"
 			"item_quality"	"normal"
