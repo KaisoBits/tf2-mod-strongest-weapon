@@ -25596,6 +25596,7 @@
 			"show_in_armory"	"1"
 			"item_type_name"	"#TF_Weapon_Robot_Arm"
 			"item_name"	"#TF_Unique_Robot_Arm"
+			"item_description"	"#TF_Unique_Robot_Arm_desc"			
 			"item_slot"	"melee"
 			"equip_region"	"arms"
 			"item_quality"	"unique"
@@ -25635,11 +25636,11 @@
 				{
 					"attribute_class"	"add_maxhealth"
 					"value" "25"
-				}		
+				}
 				"engineer sentry build rate multiplier"
 				{
 					"attribute_class"	"sentry_build_rate_multiplier"
-					"value"		"4"
+					"value"		"2.5"
 				}
 				"crit mod disabled"
 				{
