@@ -18253,7 +18253,7 @@
 				"maxammo primary increased"
 				{
 					"attribute_class"	"mult_maxammo_primary"
-					"value" "1.875"
+					"value" "1.0875"
 				}
 			}
 			"mouse_pressed_sound"	"ui/item_heavy_gun_pickup.wav"
