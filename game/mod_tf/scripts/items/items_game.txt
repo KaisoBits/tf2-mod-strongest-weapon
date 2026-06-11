@@ -36918,6 +36918,11 @@
 					"attribute_class"	"speed_boost_on_hit"
 					"value"	"3"
 				}
+				"dmg taken increased"
+				{
+					"attribute_class"	"mult_dmgtaken"
+					"value"	"1.20"
+				}
 			}
 			"visuals"
 			{
