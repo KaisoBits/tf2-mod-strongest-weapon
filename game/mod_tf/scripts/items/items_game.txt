@@ -18253,7 +18253,7 @@
 				"maxammo primary increased"
 				{
 					"attribute_class"	"mult_maxammo_primary"
-					"value" "1.0875"
+					"value" "1.875"
 				}
 			}
 			"mouse_pressed_sound"	"ui/item_heavy_gun_pickup.wav"
@@ -20981,10 +20981,10 @@
 					"attribute_class"	"ignore_sticky_downsides"
 					"value"	"1"
 				}
-				"maxammo primary increased"
+				"maxammo secondary increased"
 				{
-					"attribute_class"	"mult_maxammo_primary"
-					"value" "1.7"
+					"attribute_class"	"mult_maxammo_secondary"
+					"value"	"1.66"
 				}
 			}
 			"mouse_pressed_sound"	"ui/item_heavy_gun_pickup.wav"
