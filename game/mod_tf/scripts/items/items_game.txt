@@ -18190,7 +18190,7 @@
 				"always_spunup_damage_resistance"
 				{
 					"attribute_class"		"always_spunup_damage_resistance"
-					"value"					"0.80"
+					"value"					"20"
 				}
 			}
 		}
