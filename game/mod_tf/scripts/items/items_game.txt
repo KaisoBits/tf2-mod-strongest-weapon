@@ -225798,7 +225798,7 @@
 		{
 			"name"	"health on radius damage"
 			"attribute_class"	"add_health_on_radius_damage"
-			"description_string"	"#Attrib_HealthOnRadiusDamage"
+			"description_string"	"#Attrib_HealthOnRadiusDamage2"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"positive"
