@@ -65,7 +65,7 @@ bool CTFRevolver::DefaultReload( int iClipSize1, int iClipSize2, int iActivity )
 	int reloadWhenStealthed = 0;
 	CALL_ATTRIB_HOOK_INT(reloadWhenStealthed, reload_when_stealthed);
 
-	if (reloadWhenStealthed)
+	if (reloadWhenStealthed == 0)
 	{
 		if ( pPlayer->IsPlayerClass( TF_CLASS_SPY ) )
 		{
