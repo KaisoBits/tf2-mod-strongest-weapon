@@ -222353,7 +222353,7 @@
 		{
 			"name"	"projectile penetration"
 			"attribute_class"	"projectile_penetration"
-			"description_string"	"#Attrib_Penetration"
+			"description_string"	"#Attrib_Penetration2"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"positive"
