@@ -19781,6 +19781,7 @@
 			"item_iconname"	"rescue_ranger"
 			"item_type_name"	"#TF_Weapon_Shotgun"
 			"item_name"	"#TF_Weapon_Shotgun_Building_Rescue"
+			"item_description"	"#TF_Weapon_Shotgun_Building_Rescue_desc"
 			"item_slot"	"primary"
 			"item_quality"	"unique"
 			"propername"	"1"
