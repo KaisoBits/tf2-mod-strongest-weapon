@@ -48431,10 +48431,10 @@
 					"attribute_class"	"provide_on_active"
 					"value" "1"
 				}
-				"mod shovel speed boost"
+				"mod shovel damage and speed boost"
 				{
 					"attribute_class"	"set_weapon_mode"
-					"value"	"2"
+					"value"	"3"
 				}
 				"mod weapon blocks healing"
 				{
