@@ -23560,6 +23560,7 @@
 			"show_in_armory"	"1"
 			"item_type_name"	"#TF_Weapon_Watch"
 			"item_name"	"#TF_Unique_Achievement_FeignWatch"
+			"item_description" "#TF_Unique_Achievement_FeignWatch_desc"
 			"item_slot"	"pda2"
 			"anim_slot"	"FORCE_NOT_USED"
 			"item_quality"	"unique"
