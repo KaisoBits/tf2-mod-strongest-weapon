@@ -15979,6 +15979,7 @@
 			"show_in_armory"	"1"
 			"item_type_name"	"#TF_Weapon_Revolver"
 			"item_name"	"#TF_Unique_Achievement_Revolver"
+			"item_description" "#TF_Unique_Achievement_Revolver_desc"
 			"item_slot"	"secondary"
 			"item_quality"	"unique"
 			"propername"	"1"
