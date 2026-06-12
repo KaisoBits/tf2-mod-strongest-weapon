@@ -932,15 +932,17 @@ ConVar tf_grapplinghook_enable( "tf_grapplinghook_enable", "0", FCVAR_REPLICATED
 
 #ifdef GAME_DLL
 
-// MVP: send a chat message to the SourceTV (HLTV) bot only, so it appears in
-// STV demo recordings but is never shown to live players. Once validated in a
-// recorded demo, this same send path will be driven by game events instead.
-CON_COMMAND_F( stv_chat_test, "Send a test chat message to SourceTV only (for STV demo logging)", FCVAR_GAMEDLL )
-{
-	/* // Listenserver host or rcon access only!
-	if ( !UTIL_IsCommandIssuedByServerAdmin() )
-		return; */
+//-----------------------------------------------------------------------------
+// STV demo chat logger: sends chat lines to the SourceTV (HLTV) bot only, so
+// they are recorded into STV demos but never shown to live players.
+//-----------------------------------------------------------------------------
 
+// Prepended to every logged line so demo parsing scripts can regex for it.
+// Empty string disables the prefix.
+#define STV_CHAT_LOG_PREFIX "[SCL] "
+
+static void STVChatLog( const char *pszMsg )
+{
 	CRecipientFilter filter;
 	for ( int i = 1; i <= gpGlobals->maxClients; i++ )
 	{
@@ -952,16 +954,159 @@ CON_COMMAND_F( stv_chat_test, "Send a test chat message to SourceTV only (for ST
 	}
 
 	if ( filter.GetRecipientCount() == 0 )
-	{
-		Msg( "stv_chat_test: no SourceTV bot found. Set tv_enable 1 and reload the map first.\n" );
 		return;
-	}
 
 	filter.MakeReliable();
 
-	const char *pszMsg = ( args.ArgC() > 1 ) ? args.ArgS() : "[STV LOG] stv_chat_test message";
-	UTIL_ClientPrintFilter( filter, HUD_PRINTTALK, pszMsg );
-	Msg( "stv_chat_test: sent \"%s\" to SourceTV\n", pszMsg );
+	char szTagged[256];
+	V_snprintf( szTagged, sizeof( szTagged ), STV_CHAT_LOG_PREFIX "%s", pszMsg );
+	UTIL_ClientPrintFilter( filter, HUD_PRINTTALK, szTagged );
+}
+
+static void STVChatLogf( PRINTF_FORMAT_STRING const char *pszFmt, ... )
+{
+	char szMsg[256];
+	va_list args;
+	va_start( args, pszFmt );
+	V_vsnprintf( szMsg, sizeof( szMsg ), pszFmt, args );
+	va_end( args );
+
+	STVChatLog( szMsg );
+}
+
+static const char *STVLog_ChargeTypeName( int iChargeType )
+{
+	switch ( iChargeType )
+	{
+		case MEDIGUN_CHARGE_INVULN:			return "uber";
+		case MEDIGUN_CHARGE_CRITICALBOOST:	return "kritz";
+		case MEDIGUN_CHARGE_MEGAHEAL:		return "quickfix";
+		case MEDIGUN_CHARGE_BULLET_RESIST:	return "Bullet Vac";
+		case MEDIGUN_CHARGE_BLAST_RESIST:	return "Blast Vac";
+		case MEDIGUN_CHARGE_FIRE_RESIST:	return "Fire Vac";
+	}
+	return "Unknown";
+}
+
+static const char *STVLog_WeaponName( CBaseCombatWeapon *pWeapon )
+{
+	if ( pWeapon->GetAttributeContainer() && pWeapon->GetAttributeContainer()->GetItem() && pWeapon->GetAttributeContainer()->GetItem()->IsValid() )
+	{
+		const GameItemDefinition_t *pItemDef = pWeapon->GetAttributeContainer()->GetItem()->GetItemDefinition();
+		if ( pItemDef && pItemDef->GetItemBaseName() )
+			return pItemDef->GetItemBaseName();
+	}
+
+	return pWeapon->GetClassname();
+}
+
+static void STVLog_GameEvent( IGameEvent *event )
+{
+	const char *eventName = event->GetName();
+
+	if ( !Q_strcmp( eventName, "post_inventory_application" ) )
+	{
+		// fires whenever a loadout is applied: spawn, resupply locker touch,
+		// or weapon switch in a spawn room. Only carries userid, so read
+		// team/class off the player entity.
+		CTFPlayer *pPlayer = ToTFPlayer( UTIL_PlayerByUserId( event->GetInt( "userid" ) ) );
+		if ( !pPlayer || !pPlayer->GetPlayerClass() )
+			return;
+
+		int iTeam = pPlayer->GetTeamNumber();
+		int iClass = pPlayer->GetPlayerClass()->GetClassIndex();
+
+		// skip connect-time spawns before the player has picked a team/class
+		if ( iTeam < FIRST_GAME_TEAM || iClass == TF_CLASS_UNDEFINED )
+			return;
+
+		const char *pszTeam = ( iTeam >= 0 && iTeam < TF_TEAM_COUNT ) ? g_aTeamNames[iTeam] : "Unknown";
+		const char *pszClass = ( iClass >= 0 && iClass < TF_CLASS_MENU_BUTTONS ) ? g_aPlayerClassNames_NonLocalized[iClass] : "Unknown";
+
+		char szWeapons[160] = { 0 };
+		for ( int i = 0; i < MAX_WEAPONS; i++ )
+		{
+			CBaseCombatWeapon *pWeapon = pPlayer->GetWeapon( i );
+			if ( !pWeapon )
+				continue;
+
+			if ( szWeapons[0] )
+			{
+				V_strncat( szWeapons, ", ", sizeof( szWeapons ) );
+			}
+			V_strncat( szWeapons, STVLog_WeaponName( pWeapon ), sizeof( szWeapons ) );
+		}
+
+		STVChatLogf( "%s - %s %s: %s", pPlayer->GetPlayerName(), pszTeam, pszClass, szWeapons[0] ? szWeapons : "no weapons" );
+	}
+	else if ( !Q_strcmp( eventName, "teamplay_point_captured" ) )
+	{
+		int iTeam = event->GetInt( "team" );
+		const char *pszTeam = ( iTeam >= 0 && iTeam < TF_TEAM_COUNT ) ? g_aTeamNames[iTeam] : "Unknown";
+
+		// each character of the cappers string is a capping player's entity index
+		char szCappers[160] = { 0 };
+		const char *cappers = event->GetString( "cappers" );
+		for ( int i = 0; i < Q_strlen( cappers ); i++ )
+		{
+			CBasePlayer *pCapper = UTIL_PlayerByIndex( (int)cappers[i] );
+			if ( !pCapper )
+				continue;
+
+			if ( szCappers[0] )
+			{
+				V_strncat( szCappers, ", ", sizeof( szCappers ) );
+			}
+			V_strncat( szCappers, pCapper->GetPlayerName(), sizeof( szCappers ) );
+		}
+
+		STVChatLogf( "%s captured %s (cappers: %s)", pszTeam, event->GetString( "cpname" ), szCappers[0] ? szCappers : "none" );
+	}
+	else if ( !Q_strcmp( eventName, "teamplay_round_win" ) )
+	{
+		int iTeam = event->GetInt( "team" );
+		if ( iTeam >= FIRST_GAME_TEAM && iTeam < TF_TEAM_COUNT )
+		{
+			STVChatLogf( "Round won %s (time: %.0f sec)", g_aTeamNames[iTeam], event->GetFloat( "round_time" ) );
+		}
+		else
+		{
+			STVChatLogf( "Round stalemate (time: %.0f sec)", event->GetFloat( "round_time" ) );
+		}
+	}
+	else if ( !Q_strcmp( eventName, "teamplay_round_start" ) )
+	{
+		STVChatLog( "Round started" );
+	}
+	else if ( !Q_strcmp( eventName, "teamplay_setup_finished" ) )
+	{
+		STVChatLog( "Setup finished" );
+	}
+	else if ( !Q_strcmp( eventName, "player_chargedeployed" ) )
+	{
+		CTFPlayer *pMedic = ToTFPlayer( UTIL_PlayerByUserId( event->GetInt( "userid" ) ) );
+		if ( !pMedic )
+			return;
+
+		// the event doesn't carry the charge type, so read it off the medic's medigun
+		const char *pszChargeType = "Unknown";
+		CWeaponMedigun *pMedigun = dynamic_cast<CWeaponMedigun*>( pMedic->Weapon_OwnsThisID( TF_WEAPON_MEDIGUN ) );
+		if ( pMedigun )
+		{
+			pszChargeType = STVLog_ChargeTypeName( pMedigun->GetChargeType() );
+		}
+
+		// targetid is only set when the charge was deployed onto a player
+		CBasePlayer *pTarget = UTIL_PlayerByUserId( event->GetInt( "targetid" ) );
+		if ( pTarget )
+		{
+			STVChatLogf( "%s used %s on %s", pMedic->GetPlayerName(), pszChargeType, pTarget->GetPlayerName() );
+		}
+		else
+		{
+			STVChatLogf( "%s used %s", pMedic->GetPlayerName(), pszChargeType );
+		}
+	}
 }
 
 CUtlString s_strNextMvMPopFile;
@@ -3343,6 +3488,10 @@ CTFGameRules::CTFGameRules()
 	ListenForGameEvent( "player_disconnect" );
 	ListenForGameEvent( "teamplay_setup_finished" );
 	ListenForGameEvent( "recalculate_truce" );
+
+	// subscribed for the STV demo chat logger (STVLog_GameEvent)
+	ListenForGameEvent( "post_inventory_application" );
+	ListenForGameEvent( "player_chargedeployed" );
 
 	Q_memset( m_vecPlayerPositions,0, sizeof(m_vecPlayerPositions) );
 
@@ -18245,6 +18394,9 @@ void CTFGameRules::FireGameEvent( IGameEvent *event )
 	const char *eventName = event->GetName();
 
 #ifdef GAME_DLL
+	// log to SourceTV demo chat. up here so we don't get owned by early outs down below, etc
+	STVLog_GameEvent( event );
+
 	if ( !Q_strcmp( eventName, "teamplay_point_captured" ) )
 	{
 		if ( IsMannVsMachineMode() )
