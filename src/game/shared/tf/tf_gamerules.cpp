@@ -931,6 +931,39 @@ extern ConVar tf_flag_return_time_credit_factor;
 ConVar tf_grapplinghook_enable( "tf_grapplinghook_enable", "0", FCVAR_REPLICATED );
 
 #ifdef GAME_DLL
+
+// MVP: send a chat message to the SourceTV (HLTV) bot only, so it appears in
+// STV demo recordings but is never shown to live players. Once validated in a
+// recorded demo, this same send path will be driven by game events instead.
+CON_COMMAND_F( stv_chat_test, "Send a test chat message to SourceTV only (for STV demo logging)", FCVAR_GAMEDLL )
+{
+	/* // Listenserver host or rcon access only!
+	if ( !UTIL_IsCommandIssuedByServerAdmin() )
+		return; */
+
+	CRecipientFilter filter;
+	for ( int i = 1; i <= gpGlobals->maxClients; i++ )
+	{
+		CBasePlayer *pPlayer = UTIL_PlayerByIndex( i );
+		if ( pPlayer && pPlayer->IsHLTV() )
+		{
+			filter.AddRecipient( pPlayer );
+		}
+	}
+
+	if ( filter.GetRecipientCount() == 0 )
+	{
+		Msg( "stv_chat_test: no SourceTV bot found. Set tv_enable 1 and reload the map first.\n" );
+		return;
+	}
+
+	filter.MakeReliable();
+
+	const char *pszMsg = ( args.ArgC() > 1 ) ? args.ArgS() : "[STV LOG] stv_chat_test message";
+	UTIL_ClientPrintFilter( filter, HUD_PRINTTALK, pszMsg );
+	Msg( "stv_chat_test: sent \"%s\" to SourceTV\n", pszMsg );
+}
+
 CUtlString s_strNextMvMPopFile;
 CON_COMMAND_F( tf_mvm_popfile, "Change to a target popfile for MvM", FCVAR_GAMEDLL )
 {
