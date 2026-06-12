@@ -11068,10 +11068,10 @@ float CTFPlayer::TeamFortress_CalculateMaxSpeed( bool bIgnoreSpecialAbility /*= 
 			maxfbspeed *= RemapValClamped( m_Shared.GetScoutHypeMeter(), 0.0f, 100.0f, 1.0f, 1.45f );
 		}
 		// Atomic Punch gives a move bonus while active
-// 		if ( m_Shared.InCond( TF_COND_PHASE ) )
-// 		{
-// 			maxfbspeed *= 1.25f;
-// 		}
+ 		if ( m_Shared.InCond( TF_COND_PHASE ) )
+ 		{
+ 			maxfbspeed *= 1.25f;
+ 		}
 	}
 
 	// Mann Vs Machine mode has a speed penalty for carrying the flag
