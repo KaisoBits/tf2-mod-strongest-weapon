@@ -23137,7 +23137,7 @@
 			"prefab"	"valve weapon_bonk"
 			"first_sale_date"	"2010/09/29"
 			"item_name"	"#TF_Unique_Achievement_EnergyDrink"
-			"item_description" "#TF_Unique_Achievement_EnergyDrink_desc"
+			"item_description" "#TF_Unique_Achievement_EnergyDrink_desc2"
 			"image_inventory"	"backpack/weapons/c_models/c_energy_drink/c_energy_drink"
 			"model_player"	"models/weapons/c_models/c_energy_drink/c_energy_drink.mdl"
 		}
