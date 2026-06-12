@@ -22882,6 +22882,7 @@
 			"show_in_armory"	"1"
 			"item_type_name"	"#TF_Weapon_Minigun"
 			"item_name"	"#TF_Unique_Achievement_Minigun"
+			"item_description" "#TF_Unique_Achievement_Minigun_desc"
 			"item_slot"	"primary"
 			"item_logname"	"natascha"
 			"item_iconname"	"natascha"
@@ -32643,7 +32644,7 @@
 				"can_heal_allies"		"1"
 			}
 			"item_name"	"#TF_BuffaloSteak"
-			"item_description"	"#TF_BuffaloSteak_Desc"
+			"item_description"	"#TF_BuffaloSteak_Desc2"
 			"image_inventory"	"backpack/workshop/weapons/c_models/c_buffalo_steak/c_buffalo_steak"
 			"model_player"	"models/workshop/weapons/c_models/c_buffalo_steak/c_buffalo_steak.mdl"
 			"propername"	"1"
