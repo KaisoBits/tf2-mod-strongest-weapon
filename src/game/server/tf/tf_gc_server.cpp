@@ -4185,7 +4185,7 @@ void CTFGCServerSystem::WebapiEquipmentThinkRequest( CSteamID steamID, WebapiEqu
 
 		// Don't allow spamming this api -- wait 20 seconds before we ask gc for items again
 		state.RequestSucceeded();
-		state.Backoff();
+		//state.Backoff();
 		state.m_eState = kWebapiEquipmentState_WaitingForClientRequest;
 		break;
 
