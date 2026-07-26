@@ -686,6 +686,17 @@ void CTFProjectile_Arrow::BuildingHealingArrow( CBaseEntity *pOther )
 		const char *pParticleName = GetTeamNumber() == TF_TEAM_BLUE ? CLAW_REPAIR_EFFECT_BLU : CLAW_REPAIR_EFFECT_RED;
 		CPVSFilter filter( GetAbsOrigin() );
 		TE_TFParticleEffect( filter, 0.0, pParticleName, GetAbsOrigin(), vec3_angle );
+
+		// Fire building_healed game event so clients will show combat text
+		IGameEvent *pEvent = gameeventmanager->CreateEvent( "building_healed" );
+		if ( pEvent )
+		{
+			pEvent->SetInt( "priority", 1 ); // HLTV priority, not transmitted
+			pEvent->SetInt( "building", pBuilding->entindex() );
+			pEvent->SetInt( "healer", pTFAttacker->entindex() );
+			pEvent->SetInt( "amount", nHealed );
+			gameeventmanager->FireEvent( pEvent );
+		}
 	}
 }
 
